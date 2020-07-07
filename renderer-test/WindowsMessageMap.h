@@ -17,9 +17,13 @@
 *	You should have received a copy of the GNU General Public License					  *
 *	along with The Chili Direct3D Engine.  If not, see <http://www.gnu.org/licenses/>.    *
 ******************************************************************************************/
+#ifndef WINDOWSMESSAGE_H
+#define WINDOWSMESSAGE_H
+
 #pragma once
+
 #include <unordered_map>
-#include "Windows.h"
+#include "CustomWindows.h"
 
 class WindowsMessageMap
 {
@@ -29,3 +33,5 @@ public:
 private:
 	std::unordered_map<DWORD, std::string> map;
 };
+
+#endif

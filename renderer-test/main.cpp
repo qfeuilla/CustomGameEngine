@@ -7,18 +7,30 @@ int CALLBACK WinMain(
 	LPSTR		lpCmdLine,
 	int			nCmdShow) {
 
-	Window wnd(1920, 1080, "3D Game Engine");
+	try {
+		Window wnd(1920, 1080, "3D Game Engine");
 
-	MSG msg;
-	BOOL gResult;
-	while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0) {
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		MSG msg;
+		BOOL gResult;
+		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+
+		if (gResult == -1) {
+			return -1;
+		}
+
+		return msg.wParam;
 	}
-
-	if (gResult == -1) {
-		return -1;
+	catch (const WndException& e) {
+		MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
 	}
-
-	return msg.wParam;
+	catch (const std::exception& e) {
+		MessageBox(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
+	}
+	catch (...) {
+		MessageBox(nullptr, "No details", "Unknow Exception", MB_OK | MB_ICONEXCLAMATION);
+	}
+	return -1;
 }

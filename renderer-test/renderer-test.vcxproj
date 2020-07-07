@@ -166,11 +166,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowsMessageMap.cpp" />
+    <ClCompile Include="WndException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomWindows.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsMessageMap.h" />
+    <ClInclude Include="WndException.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

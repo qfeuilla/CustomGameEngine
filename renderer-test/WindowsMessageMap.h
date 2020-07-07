@@ -25,8 +25,7 @@
 #include <unordered_map>
 #include "CustomWindows.h"
 
-class WindowsMessageMap
-{
+class WindowsMessageMap {
 public:
 	WindowsMessageMap() noexcept;
 	std::string operator()(DWORD msg, LPARAM lp, WPARAM wp) const noexcept;

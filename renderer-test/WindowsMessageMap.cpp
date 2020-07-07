@@ -22,7 +22,7 @@
 #include <sstream>
 #include <iomanip>
 
-// secret messages
+// Secret messages
 #define WM_UAHDESTROYWINDOW 0x0090
 #define WM_UAHDRAWMENU 0x0091
 #define WM_UAHDRAWMENUITEM 0x0092
@@ -32,8 +32,7 @@
 
 #define REGISTER_MESSAGE(msg){msg,#msg}
 
-WindowsMessageMap::WindowsMessageMap() noexcept
-	:
+WindowsMessageMap::WindowsMessageMap() noexcept :
 	map({
 		REGISTER_MESSAGE(WM_CREATE),
 		REGISTER_MESSAGE(WM_DESTROY),
@@ -209,18 +208,15 @@ WindowsMessageMap::WindowsMessageMap() noexcept
 		})
 {}
 
-std::string WindowsMessageMap::operator()(DWORD msg, LPARAM lp, WPARAM wp) const noexcept
-{
+std::string WindowsMessageMap::operator()(DWORD msg, LPARAM lp, WPARAM wp) const noexcept {
 	constexpr int firstColWidth = 25;
 	const auto i = map.find(msg);
 
 	std::ostringstream oss;
-	if (i != map.end())
-	{
+	if (i != map.end()) {
 		oss << std::left << std::setw(firstColWidth) << i->second << std::right;
 	}
-	else
-	{
+	else {
 		std::ostringstream padss;
 		padss << "Unknown message: 0x" << std::hex << msg;
 		oss << std::left << std::setw(firstColWidth) << padss.str() << std::right;

@@ -3,9 +3,9 @@
 #include "resource.h"
 
 // Window Class Stuff
-Window::WindowClass Window::WindowClass::wndClass;
+Window::WindowClass Window::WindowClass::wnd_class;
 
-Window::WindowClass::WindowClass() noexcept: hInst(GetModuleHandle(nullptr)) {
+Window::WindowClass::WindowClass() noexcept : h_inst(GetModuleHandle(nullptr)) {
 	WNDCLASSEX wc = { 0 };
 	wc.cbSize = sizeof(wc);
 	wc.style = CS_OWNDC;
@@ -32,11 +32,11 @@ Window::WindowClass::~WindowClass() {
 }
 
 const char* Window::WindowClass::GetName() noexcept {
-	return wndClassName;
+	return wnd_class_name;
 }
 
 HINSTANCE Window::WindowClass::GetInstance() noexcept {
-	return wndClass.hInst;
+	return wnd_class.h_inst;
 }
 
 // Window Stuff
@@ -48,7 +48,7 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 	wr.top = 100;
 	wr.bottom = height + wr.top;
 	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
-	
+
 	// Create window & get hWnd
 	hWnd = CreateWindow(
 		WindowClass::GetName(), name,
@@ -107,7 +107,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_CLOSE:
 		PostQuitMessage(0);
 		// Don't need to destroy windows because custom destructor
-		return 0;	
+		return 0;
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
@@ -121,8 +121,8 @@ const char* Window::Exception::what() const noexcept {
 		<< "[Error Code] : " << GetErrorCode() << std::endl
 		<< "[Description] : " << GetErrorString() << std::endl
 		<< GetOriginString();
-	whatBuffer = oss.str();
-	return whatBuffer.c_str();
+	what_buffer = oss.str();
+	return what_buffer.c_str();
 }
 
 const char* Window::Exception::GetType() const noexcept {
@@ -141,7 +141,7 @@ std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept {
 	if (nMsgLen == 0) {
 		return "Unidentified Error Code";
 	}
-	
+
 	std::string errorString = pMsgBuf;
 	LocalFree(pMsgBuf);
 	return errorString;

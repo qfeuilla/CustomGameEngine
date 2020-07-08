@@ -1,4 +1,3 @@
-
 #ifndef WINDOW_H
 #define WINDOW_H
 
@@ -8,7 +7,7 @@
 
 class Window {
 public:
-	Window(int width, int height, const char * name);
+	Window(int width, int height, const char* name);
 	~Window();
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
@@ -37,9 +36,9 @@ private:
 		~WindowClass();
 		WindowClass(const WindowClass&) = delete;
 		WindowClass& operator=(const WindowClass&) = delete;
-		static constexpr const char* wndClassName = "DirectX CPP Engine";
-		static WindowClass wndClass;
-		HINSTANCE hInst;
+		static constexpr const char* wnd_class_name = "DirectX CPP Engine";
+		static WindowClass wnd_class;
+		HINSTANCE h_inst;
 	};
 
 	// Msg Handlers

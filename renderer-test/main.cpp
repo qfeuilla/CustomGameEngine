@@ -2,11 +2,10 @@
 
 // Main for window App
 int CALLBACK WinMain(
-	HINSTANCE	hInstance,
-	HINSTANCE	hPrevInstance,
-	LPSTR		lpCmdLine,
-	int			nCmdShow) {
-
+	HINSTANCE	h_instance,
+	HINSTANCE	h_prev_instance,
+	LPSTR		lp_cmd_line,
+	int			n_cmd_show) {
 	try {
 		Window wnd(1920, 1080, "3D Game Engine");
 

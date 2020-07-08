@@ -6,8 +6,8 @@ WndException::WndException(int line, const char* file) noexcept : line(line), fi
 const char* WndException::what() const noexcept {
 	std::ostringstream oss;
 	oss << GetType() << std::endl << GetOriginString();
-	whatBuffer = oss.str();
-	return whatBuffer.c_str();
+	what_buffer = oss.str();
+	return what_buffer.c_str();
 }
 
 const char* WndException::GetType() const noexcept {

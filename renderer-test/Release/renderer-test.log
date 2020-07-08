@@ -1,5 +1,2 @@
-﻿  main.cpp
-  Window.cpp
-  WindowsMessageMap.cpp
-  WndException.cpp
+﻿  Window.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Release\renderer-test.exe

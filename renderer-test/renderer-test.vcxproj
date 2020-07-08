@@ -170,9 +170,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CustomWindows.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsMessageMap.h" />
     <ClInclude Include="WndException.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="renderer-test.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\ressources\icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

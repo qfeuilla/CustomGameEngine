@@ -3,7 +3,6 @@
 
 #pragma once
 #include <queue>
-#include <optional>
 
 class Mouse
 {
@@ -31,6 +30,12 @@ public:
 			w_pressed(parent.w_pressed),
 			x(parent.x),
 			y(parent.y) {}
+		Event() noexcept :
+			type(Type::Invalid),
+			l_pressed(false),
+			r_pressed(false),
+			w_pressed(false),
+			x(0), y(0) {}
 
 		bool isValid() {
 			return type != Type::Invalid;
@@ -75,7 +80,7 @@ public:
 	bool LeftIsPressed() const noexcept;
 	bool RightIsPressed() const noexcept;
 	bool WheelIsPressed() const noexcept;
-	std::optional<Mouse::Event> Read() noexcept;
+	Mouse::Event Read() noexcept;
 	bool IsEmty() const noexcept;
 	void Clean() noexcept;
 

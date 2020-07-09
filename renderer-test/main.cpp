@@ -1,4 +1,5 @@
 #include "Window.h"
+#include <sstream>
 
 // Main for window App
 int CALLBACK WinMain(
@@ -15,9 +16,17 @@ int CALLBACK WinMain(
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 
-			if (wnd.keyBrd.KeyIsPressed(VK_MENU)) {
-				MessageBox(nullptr, "You Press Space you are amazing", "42", MB_OK | MB_ICONEXCLAMATION);
+			/*
+			while (!wnd.mouse.IsEmty()) {
+				const auto e = wnd.mouse.Read();
+				if (e.GetType() == Mouse::Event::Type::Move) {
+					std::ostringstream oss;
+					oss << "Mouse Position : {" << e.GetPosX() << "," << e.GetPosY() << "}";
+					wnd.SetTitle(oss.str());
+				}
+				OutputDebugString("aa");
 			}
+			*/
 		}
 
 		if (gResult == -1) {

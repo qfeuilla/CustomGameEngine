@@ -24,13 +24,13 @@ bool Mouse::WheelIsPressed() const noexcept {
 	return w_pressed;
 }
 
-std::optional<Mouse::Event>	Mouse::Read() noexcept {
-	if (buffer.size() > buffer_size) {
+Mouse::Event	Mouse::Read() noexcept {
+	if (buffer.size() > 0u) {
 		Mouse::Event e = buffer.front();
 		buffer.pop();
 		return e;
 	}
-	return {};
+	return Mouse::Event();
 }
 
 bool Mouse::IsEmty() const noexcept {

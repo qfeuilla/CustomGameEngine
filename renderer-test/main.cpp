@@ -14,6 +14,10 @@ int CALLBACK WinMain(
 		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
+			if (wnd.keyBrd.KeyIsPressed(VK_MENU)) {
+				MessageBox(nullptr, "You Press Space you are amazing", "42", MB_OK | MB_ICONEXCLAMATION);
+			}
 		}
 
 		if (gResult == -1) {

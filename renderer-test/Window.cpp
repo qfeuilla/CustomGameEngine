@@ -108,6 +108,28 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		PostQuitMessage(0);
 		// Don't need to destroy windows because custom destructor
 		return 0;
+	// Clear keystates whent focus changes, prevent input repeat
+	case WM_KILLFOCUS:
+		keyBrd.ClearState();
+		break;
+	// Keyboard MESSAGES
+	case WM_KEYDOWN:
+		// Siskey is used to track ALT key
+	case WM_SYSKEYDOWN:
+		// Filter multiple key press (like WASD control)
+		if (keyBrd.AutorepeatIsEnable() || !(lParam & 0x40000000)) {
+			keyBrd.OnKeyPressed(static_cast<unsigned char>(wParam));
+		}
+		break;
+	case WM_KEYUP:
+	case WM_SYSKEYUP:
+		keyBrd.OnKeyReleased(static_cast<unsigned char>(wParam));
+		break;
+	case WM_CHAR:
+		keyBrd.OnChar(static_cast<unsigned char>(wParam));
+		break;
+	// End Keyboard
+	
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }

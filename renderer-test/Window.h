@@ -4,6 +4,7 @@
 #pragma once
 #include "CustomWindows.h"
 #include "WndException.h"
+#include "Keyboard.h"
 
 class Window {
 public:
@@ -23,6 +24,8 @@ public:
 	private:
 		HRESULT hr;
 	};
+
+	Keyboard keyBrd;
 
 private:
 	// Singleton manages registration/cleanup of window class

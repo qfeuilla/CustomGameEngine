@@ -5,6 +5,7 @@
 #include "CustomWindows.h"
 #include "WndException.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 class Window {
 public:
@@ -12,6 +13,7 @@ public:
 	~Window();
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
+	void SetTitle(const std::string& title) noexcept;
 
 	class Exception : public WndException {
 	public:
@@ -26,7 +28,7 @@ public:
 	};
 
 	Keyboard keyBrd;
-
+	Mouse mouse;
 private:
 	// Singleton manages registration/cleanup of window class
 	class WindowClass

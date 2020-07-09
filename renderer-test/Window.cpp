@@ -1,6 +1,7 @@
 #include "Window.h"
 #include <sstream>
 #include "resource.h"
+#include "WindowsMessageMap.h"
 
 // Window Class Stuff
 Window::WindowClass Window::WindowClass::wnd_class;
@@ -47,7 +48,9 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 	wr.right = width + wr.left;
 	wr.top = 100;
 	wr.bottom = height + wr.top;
-	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
+	if (AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE) == 0) {
+		throw CHWND_LAST_EXCEPT();
+	}
 
 	// Create window & get hWnd
 	hWnd = CreateWindow(
@@ -67,6 +70,12 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 
 Window::~Window() {
 	DestroyWindow(hWnd);
+}
+
+void Window::SetTitle(const std::string& title) noexcept {
+	if (SetWindowText(hWnd, title.c_str()) == 0) {
+		throw CHWND_LAST_EXCEPT();
+	}
 }
 
 // Only used to setup the Window
@@ -98,11 +107,10 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept {
 	// Debug WM Messages
-#if DEBUG
+	
 	static WindowsMessageMap wmm;
 	OutputDebugString(wmm(msg, lParam, wParam).c_str());
-#endif
-
+	
 	switch (msg) {
 	case WM_CLOSE:
 		PostQuitMessage(0);
@@ -130,6 +138,52 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		break;
 	// End Keyboard
 	
+	// Mouse controll
+	case WM_MOUSEMOVE: {
+		POINTS pt = MAKEPOINTS(lParam);
+		mouse.OnMouseMove(pt.x, pt.y);
+	}
+	case WM_LBUTTONDOWN: {
+		const POINTS pt = MAKEPOINTS(lParam);
+		mouse.OnLeftPressed(pt.x, pt.y);
+		break;
+	}
+	case WM_RBUTTONDOWN: {
+		const POINTS pt = MAKEPOINTS(lParam);
+		mouse.OnRightPressed(pt.x, pt.y);
+		break;
+	}
+	case WM_LBUTTONUP: {
+		const POINTS pt = MAKEPOINTS(lParam);
+		mouse.OnLeftRelease(pt.x, pt.y);
+		break;
+	}
+	case WM_RBUTTONUP: {
+		const POINTS pt = MAKEPOINTS(lParam);
+		mouse.OnRightRelease(pt.x, pt.y);
+		break;
+	}
+	case WM_MBUTTONDOWN: {
+		const POINTS pt = MAKEPOINTS(lParam);
+		mouse.OnWheelPressed(pt.x, pt.y);
+		break;
+	}
+	case WM_MBUTTONUP: {
+		const POINTS pt = MAKEPOINTS(lParam);
+		mouse.OnWheelRelease(pt.x, pt.y);
+		break;
+	}
+	case WM_MOUSEWHEEL: {
+		const POINTS pt = MAKEPOINTS(lParam);
+		if (GET_WHEEL_DELTA_WPARAM(wParam) > 0) {
+			mouse.OnWheelUp(pt.x, pt.y);
+		}
+		else if (GET_WHEEL_DELTA_WPARAM(wParam) < 0) {
+			mouse.OnWheelDown(pt.x, pt.y);
+		}
+		break;
+	}
+	// End Mouse
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }

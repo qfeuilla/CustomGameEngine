@@ -16,17 +16,23 @@ int CALLBACK WinMain(
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 
-			/*
+			
 			while (!wnd.mouse.IsEmty()) {
 				const auto e = wnd.mouse.Read();
-				if (e.GetType() == Mouse::Event::Type::Move) {
+				switch (e.GetType()) {
+				case Mouse::Event::Type::Leave:
+					wnd.SetTitle("Gone !");
+					break;
+
+				case Mouse::Event::Type::Move:
 					std::ostringstream oss;
-					oss << "Mouse Position : {" << e.GetPosX() << "," << e.GetPosY() << "}";
+					oss << "Mouse move to {" << wnd.mouse.GetPosX() << ", " << wnd.mouse.GetPosY() << "}";
 					wnd.SetTitle(oss.str());
+					break;
+
 				}
-				OutputDebugString("aa");
 			}
-			*/
+			
 		}
 
 		if (gResult == -1) {

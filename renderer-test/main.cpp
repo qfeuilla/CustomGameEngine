@@ -16,7 +16,7 @@ int CALLBACK WinMain(
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 
-			
+			/*
 			while (!wnd.mouse.IsEmty()) {
 				const auto e = wnd.mouse.Read();
 				switch (e.GetType()) {
@@ -32,7 +32,7 @@ int CALLBACK WinMain(
 
 				}
 			}
-			
+			*/
 		}
 
 		if (gResult == -1) {

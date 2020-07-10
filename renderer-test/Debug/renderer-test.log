@@ -1,3 +1,6 @@
-﻿  main.cpp
-  Mouse.cpp
+﻿  Mouse.cpp
+  Window.cpp
+  main.cpp
+C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(77,1): warning C4297: 'Window::SetTitle' : la fonction lève une exception alors qu'elle est présumée ne pas le faire
+C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(77,1): message : __declspec(nothrow), throw(), noexcept(true) ou noexcept a été spécifié sur la fonction
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Debug\renderer-test.exe

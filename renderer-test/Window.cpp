@@ -107,10 +107,10 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept {
 	// Debug WM Messages
-	
+	/*
 	static WindowsMessageMap wmm;
 	OutputDebugString(wmm(msg, lParam, wParam).c_str());
-	
+	*/
 	switch (msg) {
 	case WM_CLOSE:
 		PostQuitMessage(0);

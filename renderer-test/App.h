@@ -3,6 +3,7 @@
 
 #pragma once
 #include "Window.h"
+#include "CustomTimer.h"
 
 class App
 {
@@ -14,6 +15,7 @@ private:
 	void Update();
 
 	Window wnd;
+	CustomTimer timer;
 };
 
 #endif

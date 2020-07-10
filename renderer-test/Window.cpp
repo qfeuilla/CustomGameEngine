@@ -66,6 +66,8 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 
 	// Newly created windows start off as hidden
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
+
+	pGfx = std::make_unique<Graphics>(hWnd);
 }
 
 Window::~Window() {
@@ -76,6 +78,27 @@ void Window::SetTitle(const std::string& title) noexcept {
 	if (SetWindowText(hWnd, title.c_str()) == 0) {
 		throw CHWND_LAST_EXCEPT();
 	}
+}
+
+std::optional<int> Window::ProcessMessages() noexcept {
+	MSG msg;
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+		// Check for quit message because peekmessage does not signal via return
+		if (msg.message == WM_QUIT) {
+			return (int)msg.wParam;
+		}
+
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	// Return empty otional when not quitting app
+	return {};
+}
+
+Graphics& Window::Gfx()
+{
+	return *pGfx;
 }
 
 // Only used to setup the Window

@@ -6,6 +6,9 @@
 #include "WndException.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Graphics.h"
+#include <optional>
+#include <memory>
 
 class Window {
 public:
@@ -14,6 +17,8 @@ public:
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
 	void SetTitle(const std::string& title) noexcept;
+	static std::optional<int> ProcessMessages() noexcept;
+	Graphics& Gfx();
 
 	class Exception : public WndException {
 	public:
@@ -55,6 +60,8 @@ private:
 	int width;
 	int height;
 	HWND hWnd;
+
+	std::unique_ptr<Graphics> pGfx;
 };
 
 // Error exception helper

@@ -1,5 +1,4 @@
-#include "Window.h"
-#include <sstream>
+#include "App.h"
 
 // Main for window App
 int CALLBACK WinMain(
@@ -8,38 +7,7 @@ int CALLBACK WinMain(
 	LPSTR		lp_cmd_line,
 	int			n_cmd_show) {
 	try {
-		Window wnd(1920, 1080, "3D Game Engine");
-
-		MSG msg;
-		BOOL gResult;
-		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0) {
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-
-			/*
-			while (!wnd.mouse.IsEmty()) {
-				const auto e = wnd.mouse.Read();
-				switch (e.GetType()) {
-				case Mouse::Event::Type::Leave:
-					wnd.SetTitle("Gone !");
-					break;
-
-				case Mouse::Event::Type::Move:
-					std::ostringstream oss;
-					oss << "Mouse move to {" << wnd.mouse.GetPosX() << ", " << wnd.mouse.GetPosY() << "}";
-					wnd.SetTitle(oss.str());
-					break;
-
-				}
-			}
-			*/
-		}
-
-		if (gResult == -1) {
-			return -1;
-		}
-
-		return msg.wParam;
+		return App{}.Start();
 	}
 	catch (const WndException& e) {
 		MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);

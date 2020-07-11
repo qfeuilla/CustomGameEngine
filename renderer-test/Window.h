@@ -20,16 +20,28 @@ public:
 	static std::optional<int> ProcessMessages() noexcept;
 	Graphics& Gfx();
 
-	class Exception : public WndException {
+	class Exception : public WndException
+	{
+		using WndException::WndException;
 	public:
-		Exception(int line, const char* file, HRESULT hr) noexcept;
+		static std::string TranslateErrorCode(HRESULT hr) noexcept;
+	};
+	class HrException : public Exception
+	{
+	public:
+		HrException(int line, const char* file, HRESULT hr) noexcept;
 		const char* what() const noexcept override;
 		const char* GetType() const noexcept override;
-		static std::string TranslateErrorCode(HRESULT hr) noexcept;
 		HRESULT GetErrorCode() const noexcept;
-		std::string GetErrorString() const noexcept;
+		std::string GetErrorDescription() const noexcept;
 	private:
 		HRESULT hr;
+	};
+	class NoGfxException : public Exception
+	{
+	public:
+		using Exception::Exception;
+		const char* GetType() const noexcept override;
 	};
 
 	Keyboard keyBrd;
@@ -65,7 +77,8 @@ private:
 };
 
 // Error exception helper
-#define CHWND_EXCEPT(hr) Window::Exception(__LINE__, __FILE__, hr)
-#define CHWND_LAST_EXCEPT() Window::Exception(__LINE__, __FILE__, GetLastError())
+#define CHWND_EXCEPT() Window::NoGfxException(__LINE__, __FILE__)
+#define CHWND_LAST_EXCEPT() Window::HrException(__LINE__, __FILE__, GetLastError())
+#define CHWND_NOGFX_EXCEPT() Window::NoGfxException(__LINE__, __FILE__)
 
 #endif

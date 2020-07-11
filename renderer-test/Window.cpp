@@ -98,6 +98,9 @@ std::optional<int> Window::ProcessMessages() noexcept {
 
 Graphics& Window::Gfx()
 {
+	if (!pGfx) {
+		throw CHWND_NOGFX_EXCEPT();
+	}
 	return *pGfx;
 }
 
@@ -139,11 +142,11 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		PostQuitMessage(0);
 		// Don't need to destroy windows because custom destructor
 		return 0;
-	// Clear keystates whent focus changes, prevent input repeat
+		// Clear keystates whent focus changes, prevent input repeat
 	case WM_KILLFOCUS:
 		keyBrd.ClearState();
 		break;
-	// Keyboard MESSAGES
+		// Keyboard MESSAGES
 	case WM_KEYDOWN:
 		// Siskey is used to track ALT key
 	case WM_SYSKEYDOWN:
@@ -159,9 +162,9 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_CHAR:
 		keyBrd.OnChar(static_cast<unsigned char>(wParam));
 		break;
-	// End Keyboard
-	
-	// Mouse controll
+		// End Keyboard
+
+		// Mouse controll
 	case WM_MOUSEMOVE: {
 		const POINTS pt = MAKEPOINTS(lParam);
 
@@ -221,50 +224,61 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		mouse.OnWheelDelta(pt.x, pt.y, delta);
 		break;
 	}
-	// End Mouse
+					  // End Mouse
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 // Window exception stuff
-Window::Exception::Exception(int line, const char* file, HRESULT hr) noexcept : WndException(line, file), hr(hr) { }
+std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept {
+	char* pMsgBuf = nullptr;
+	// Windows will allocate memory for err string and make our pointer point to it
+	const DWORD nMsgLen = FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+		nullptr, hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		reinterpret_cast<LPSTR>(&pMsgBuf), 0, nullptr
+	);
+	// 0 string length returned indicates a failure
+	if (nMsgLen == 0)
+	{
+		return "Unidentified error code";
+	}
+	// Copy error string from windows-allocated buffer to std::string
+	std::string errorString = pMsgBuf;
+	// Free windows buffer
+	LocalFree(pMsgBuf);
+	return errorString;
+}
 
-const char* Window::Exception::what() const noexcept {
+Window::HrException::HrException(int line, const char* file, HRESULT hr) noexcept :
+	Exception(line, file),
+	hr(hr) {}
+
+const char* Window::HrException::what() const noexcept
+{
 	std::ostringstream oss;
 	oss << GetType() << std::endl
-		<< "[Error Code] : " << GetErrorCode() << std::endl
-		<< "[Description] : " << GetErrorString() << std::endl
+		<< "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
+		<< std::dec << " (" << (unsigned long)GetErrorCode() << ")" << std::endl
+		<< "[Description] " << GetErrorDescription() << std::endl
 		<< GetOriginString();
 	what_buffer = oss.str();
 	return what_buffer.c_str();
 }
 
-const char* Window::Exception::GetType() const noexcept {
+const char* Window::HrException::GetType() const noexcept {
 	return "Window Exception";
 }
 
-std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept {
-	char* pMsgBuf = nullptr;
-	DWORD nMsgLen = FormatMessage(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER |
-		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-		nullptr, hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		reinterpret_cast<LPSTR>(&pMsgBuf), 0,
-		nullptr
-	);
-	if (nMsgLen == 0) {
-		return "Unidentified Error Code";
-	}
-
-	std::string errorString = pMsgBuf;
-	LocalFree(pMsgBuf);
-	return errorString;
-}
-
-HRESULT Window::Exception::GetErrorCode() const noexcept {
+HRESULT Window::HrException::GetErrorCode() const noexcept {
 	return hr;
 }
 
-std::string Window::Exception::GetErrorString() const noexcept {
-	return TranslateErrorCode(hr);
+std::string Window::HrException::GetErrorDescription() const noexcept {
+	return Exception::TranslateErrorCode(hr);
+}
+
+const char* Window::NoGfxException::GetType() const noexcept {
+	return "Window Exception [No Graphics]";
 }

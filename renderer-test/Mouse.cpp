@@ -5,11 +5,11 @@ std::pair<int, int> Mouse::GetPos() const noexcept {
 	return { x, y };
 }
 
-int Mouse::GetPosX() const noexcept {
+float Mouse::GetPosX() const noexcept {
 	return x;
 }
 
-int Mouse::GetPosY() const noexcept {
+float Mouse::GetPosY() const noexcept {
 	return y;
 }
 

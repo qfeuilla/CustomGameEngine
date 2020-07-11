@@ -77,8 +77,8 @@ public:
 	Mouse(const Mouse&) = delete;
 	Mouse& operator=(const Mouse&) = delete;
 	std::pair<int, int> GetPos() const noexcept;
-	int GetPosX() const noexcept;
-	int GetPosY() const noexcept;
+	float GetPosX() const noexcept;
+	float GetPosY() const noexcept;
 	bool LeftIsPressed() const noexcept;
 	bool RightIsPressed() const noexcept;
 	bool WheelIsPressed() const noexcept;

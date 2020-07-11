@@ -1,0 +1,2 @@
+C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe
+C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.pdb

@@ -44,6 +44,9 @@ public:
 		const char* GetType() const noexcept override;
 	};
 
+	int width;
+	int height;
+
 	Keyboard keyBrd;
 	Mouse mouse;
 private:
@@ -69,8 +72,6 @@ private:
 	LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 
 	// Window Parameters
-	int width;
-	int height;
 	HWND hWnd;
 
 	std::unique_ptr<Graphics> pGfx;

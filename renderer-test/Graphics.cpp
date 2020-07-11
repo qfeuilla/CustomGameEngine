@@ -2,8 +2,10 @@
 #include "dxerr.h"
 #include <sstream>
 #include <d3dcompiler.h>
+#include <DirectXMath.h>
 
 namespace wrl = Microsoft::WRL;
+namespace dx = DirectX;
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "D3DCompiler.lib")
@@ -70,7 +72,7 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept {
 	pContext->ClearRenderTargetView(pTarget.Get(), color);
 }
 
-void Graphics::DrawTestTriangle(float angle)
+void Graphics::DrawTestTriangle(float angle, float x, float y)
 {
 	namespace wrl = Microsoft::WRL;
 	HRESULT hr;
@@ -90,7 +92,7 @@ void Graphics::DrawTestTriangle(float angle)
 			unsigned char a;
 		} color;
 	};
-	
+
 	// Create vertex buffer (1 2d triangle at center of screen)
 	Vertex vertices[] =
 	{
@@ -143,17 +145,16 @@ void Graphics::DrawTestTriangle(float angle)
 
 	// Create constant buffer
 	struct ConstantBuffer {
-		struct {
-			float element[4][4];
-		} transformation;
+		dx::XMMATRIX transform;
 	};
 	const ConstantBuffer cb = {
 		{
-			(3.0f / 4.0f) * std::cos(angle),	std::sin(angle),	0.0f,	0.0f,
-			(3.0f / 4.0f) * -std::sin(angle),	std::cos(angle),	0.0f,	0.0f,
-			0.0f,								0.0f,				1.0f,	0.0f,
-			0.0f,								0.0f,				0.0f,	1.0f,
-		}
+			dx::XMMatrixTranspose(
+				dx::XMMatrixRotationZ(angle) *
+				dx::XMMatrixScaling(3.0f / 4.0f, 1.0f, 1.0f) *
+				dx::XMMatrixTranslation(x, y, 0)
+			)
+		}	
 	};
 	wrl::ComPtr<ID3D11Buffer> pConstantBuffer;
 	D3D11_BUFFER_DESC cbd;
@@ -219,7 +220,7 @@ void Graphics::DrawTestTriangle(float angle)
 	vp.TopLeftX = 0;
 	vp.TopLeftY = 0;
 	pContext->RSSetViewports(1u, &vp);
-	pContext->DrawIndexed( (UINT)std::size(indices), 0u, 0u);
+	pContext->DrawIndexed((UINT)std::size(indices), 0u, 0u);
 }
 
 Graphics::HrException::HrException(int line, const char* file, HRESULT hr) noexcept :
@@ -259,6 +260,3 @@ std::string Graphics::HrException::GetErrorDescription() const noexcept {
 const char* Graphics::DeviceRemovedException::GetType() const noexcept {
 	return "Graphics Exception [Device Removed] (DXGI_ERROR_DEVICE_REMOVED)";
 }
-
-
-

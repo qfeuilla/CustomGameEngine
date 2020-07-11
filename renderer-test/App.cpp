@@ -15,7 +15,7 @@ int App::Start() {
 }
 
 void App::Update() {
-	wnd.Gfx().ClearBuffer(0.0f, 0.0f, 1.0f);
-	wnd.Gfx().DrawTestTriangle();
+	wnd.Gfx().ClearBuffer(0.7f, 0.7f, 1.0f);
+	wnd.Gfx().DrawTestTriangle(timer.PeekLastMark());
 	wnd.Gfx().EndFrame();
 }

@@ -2,7 +2,7 @@
 #include <sstream>
 #include <iomanip>
 
-App::App() : wnd(960, 540, "3D Game Engine") { }
+App::App() : wnd(800, 600, "3D Game Engine") { }
 
 int App::Start() {
 	while (true) {
@@ -17,5 +17,6 @@ int App::Start() {
 void App::Update() {
 	const float c = sin(timer.PeekLastMark()) / 2.0f + 0.5f;
 	wnd.Gfx().ClearBuffer(c, c, 1.0f);
+	wnd.Gfx().DrawTestTriangle();
 	wnd.Gfx().EndFrame();
 }

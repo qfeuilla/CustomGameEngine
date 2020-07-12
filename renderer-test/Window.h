@@ -74,6 +74,8 @@ private:
 	// Window Parameters
 	HWND hWnd;
 
+	std::vector<char> raw_buffer;
+
 	std::unique_ptr<Graphics> pGfx;
 };
 

@@ -20,5 +20,21 @@ void App::Update() {
 	wnd.Gfx().DrawTestTriangle(timer.PeekLastMark(), 
 		(wnd.mouse.GetPosX() / (wnd.width / 2)) - 1,
 		-((wnd.mouse.GetPosY() / (wnd.height / 2)) - 1));
+	ShowRawInputData();
 	wnd.Gfx().EndFrame();
+}
+
+void App::ShowRawInputData() {
+	if (wnd.mouse.RawDeltaIsEmpty()) {
+		x = 0;
+		y = 0;
+	}
+	while (const auto d = wnd.mouse.ReadRawDelta()) {
+		x = d->x;
+		y = d->y;
+	}
+	std::ostringstream oss;
+	oss << "Raw x : " << x << "Raw y : " << y;
+	auto title = oss.str();
+	wnd.SetTitle(title.c_str());
 }

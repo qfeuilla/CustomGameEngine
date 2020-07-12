@@ -13,6 +13,8 @@ public:
 	int Start();
 private:
 	void Update();
+	void ShowRawInputData();
+	int x = 0, y = 0;
 
 	Window wnd;
 	CustomTimer timer;

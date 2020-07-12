@@ -38,8 +38,23 @@ Mouse::Event	Mouse::Read() noexcept {
 	return Mouse::Event();
 }
 
+std::optional<Mouse::RawDelta> Mouse::ReadRawDelta() noexcept
+{
+	if (raw_delta_buffer.empty()) {
+		return {};
+	}
+
+	RawDelta dt = raw_delta_buffer.front();
+	raw_delta_buffer.pop();
+	return dt;
+}
+
 bool Mouse::IsEmty() const noexcept {
 	return buffer.empty();
+}
+
+bool Mouse::RawDeltaIsEmpty() const noexcept {
+	return raw_delta_buffer.empty();
 }
 
 void Mouse::Clean() noexcept {
@@ -128,6 +143,13 @@ void Mouse::TrimBuffer() noexcept {
 	}
 }
 
+void Mouse::TrimRawDeltaBuffer() noexcept {
+	while (raw_delta_buffer.size() > buffer_size)
+	{
+		raw_delta_buffer.pop();
+	}
+}
+
 void Mouse::OnWheelDelta(int x, int y, int delta) noexcept {
 	wheel_delta_carry += delta;
 	// Generate events for fast wheel rotation
@@ -140,4 +162,9 @@ void Mouse::OnWheelDelta(int x, int y, int delta) noexcept {
 		wheel_delta_carry += WHEEL_DELTA;
 		OnWheelDown(x, y);
 	}
+}
+
+void Mouse::OnRawInputDelta(int x, int y) noexcept {
+	raw_delta_buffer.push({ x, y });
+	TrimRawDeltaBuffer();
 }

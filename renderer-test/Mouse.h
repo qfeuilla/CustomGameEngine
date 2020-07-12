@@ -3,11 +3,15 @@
 
 #pragma once
 #include <queue>
+#include <optional>
 
 class Mouse
 {
 	friend class Window;
 public:
+	struct RawDelta {
+		int x, y;
+	};
 	class Event {
 	public:
 		enum class Type {
@@ -84,7 +88,9 @@ public:
 	bool WheelIsPressed() const noexcept;
 	bool IsInWindow()const noexcept;
 	Mouse::Event Read() noexcept;
+	std::optional<RawDelta> ReadRawDelta() noexcept;
 	bool IsEmty() const noexcept;
+	bool RawDeltaIsEmpty() const noexcept;
 	void Clean() noexcept;
 
 private:
@@ -100,7 +106,9 @@ private:
 	void OnWheelUp(int x, int y) noexcept;
 	void OnWheelDown(int x, int y) noexcept;
 	void TrimBuffer() noexcept;
+	void TrimRawDeltaBuffer() noexcept;
 	void OnWheelDelta(int x, int y, int delta) noexcept;
+	void OnRawInputDelta(int x, int y) noexcept;
 
 	static constexpr unsigned int buffer_size = 16u;
 	int x;
@@ -111,6 +119,7 @@ private:
 	bool isInWindow = false;
 	int wheel_delta_carry = 0;
 	std::queue<Event> buffer;
+	std::queue<RawDelta> raw_delta_buffer;
 };
 
 #endif

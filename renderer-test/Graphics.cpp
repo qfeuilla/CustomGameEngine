@@ -54,21 +54,21 @@ Graphics::Graphics(HWND hWnd) {
 	GFX_THROW_FAILED(pSwap->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer));
 	GFX_THROW_FAILED(pDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &pTarget));
 
-	/*
-	// Create depth stencil state
+
+	// create depth stensil state
 	D3D11_DEPTH_STENCIL_DESC dsDesc = {};
 	dsDesc.DepthEnable = TRUE;
-	dsDesc.StencilWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
 	wrl::ComPtr<ID3D11DepthStencilState> pDSState;
 	GFX_THROW_FAILED(pDevice->CreateDepthStencilState(&dsDesc, &pDSState));
 
-	// Bind depth state
+	// bind depth state
 	pContext->OMSetDepthStencilState(pDSState.Get(), 1u);
 
-	// Bind depth stensil texture
+	// create depth stensil texture
 	wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
-	D3D11_TEXTURE2D_DESC descDepth;
+	D3D11_TEXTURE2D_DESC descDepth = {};
 	descDepth.Width = 800u;
 	descDepth.Height = 600u;
 	descDepth.MipLevels = 1u;
@@ -80,7 +80,17 @@ Graphics::Graphics(HWND hWnd) {
 	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	GFX_THROW_FAILED(pDevice->CreateTexture2D(&descDepth, nullptr, &pDepthStencil));
 
-	*/
+	// create view of depth stensil texture
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
+	descDSV.Format = DXGI_FORMAT_D32_FLOAT;
+	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	descDSV.Texture2D.MipSlice = 0u;
+	GFX_THROW_FAILED(pDevice->CreateDepthStencilView(
+		pDepthStencil.Get(), &descDSV, &pDSV
+	));
+
+	// bind depth stensil view to OM
+	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
 }
 
 void Graphics::EndFrame() {
@@ -98,6 +108,7 @@ void Graphics::EndFrame() {
 void Graphics::ClearBuffer(float red, float green, float blue) noexcept {
 	const float color[] = { red, green, blue, 1.0f };
 	pContext->ClearRenderTargetView(pTarget.Get(), color);
+	pContext->ClearDepthStencilView(pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
 
 void Graphics::DrawTestTriangle(float angle, float x, float y)
@@ -178,7 +189,7 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
 			dx::XMMatrixTranspose(
 				dx::XMMatrixRotationZ(angle) *
 				dx::XMMatrixRotationX(angle) *
-				dx::XMMatrixTranslation(x, y, 4.0f) *
+				dx::XMMatrixTranslation(x, 0.0f, y + 4.0f) *
 				dx::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f)
 			)
 		}	
@@ -265,9 +276,6 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
 
 	// Bind vertex layout
 	pContext->IASetInputLayout(pInputLayout.Get());
-
-	// Bind render target
-	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), nullptr);
 
 	// Set primitive topology to triangle list (groups of 3 vertices)
 	pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

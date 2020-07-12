@@ -17,6 +17,11 @@ int App::Start() {
 
 void App::Update() {
 	wnd.Gfx().ClearBuffer(0.7f, 0.7f, 1.0f);
+	wnd.Gfx().DrawTestTriangle(
+		-timer.PeekLastMark(),
+		0.0f,
+		0.0f
+	);
 	wnd.Gfx().DrawTestTriangle(timer.PeekLastMark(), 
 		(wnd.mouse.GetPosX() / (wnd.width / 2)) - 1,
 		-((wnd.mouse.GetPosY() / (wnd.height / 2)) - 1));

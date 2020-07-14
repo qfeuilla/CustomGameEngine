@@ -16,6 +16,21 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{d4a61c06-c1b3-467b-b466-151acf889e1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Macros">
+      <UniqueIdentifier>{a932f6a3-f35c-4b19-bfef-7f4252de9303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Bindable">
+      <UniqueIdentifier>{c5c45ba4-c56e-41eb-8853-a5b7ef15643e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Bindable">
+      <UniqueIdentifier>{f476d67e-efdf-4054-bb6b-bad3f09e4073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Drawable">
+      <UniqueIdentifier>{eca53bf7-3830-4aba-b508-a9a24e42abaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Drawable">
+      <UniqueIdentifier>{7a6cd681-a74f-4457-a60e-29824b4d4014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,6 +62,36 @@
     </ClCompile>
     <ClCompile Include="dxerr.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Bindable.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="InputLayout.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Topology.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformCbuf.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexShader.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>Fichiers sources\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Fichiers sources\Drawable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,11 +128,50 @@
     <ClInclude Include="dxerr.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsThrowMacros.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="WindowsThrowMacros.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsThrowMacros.h">
+      <Filter>Fichiers d%27en-tête\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="Bindable.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableBase.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffers.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLayout.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Topology.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformCbuf.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Fichiers d%27en-tête\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShader.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Fichiers d%27en-tête\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableBase.h">
+      <Filter>Fichiers d%27en-tête\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,4 +14,4 @@
 // macro for importing infomanager into local scope
 // this.GetInfoManager() must exist
 
-#define INFOMAN() HRESULT hr;
+#define INFOMAN(gfx) HRESULT hr

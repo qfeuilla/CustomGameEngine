@@ -76,7 +76,7 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 	rid.usUsage = 0x02;
 	rid.dwFlags = 0;
 	rid.hwndTarget = nullptr;
-	if (RegisterRawInputDevices( &rid, 1, sizeof(rid)) == FALSE) {
+	if (RegisterRawInputDevices(&rid, 1, sizeof(rid)) == FALSE) {
 		throw CHWND_LAST_EXCEPT();
 	}
 }
@@ -236,9 +236,9 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		mouse.OnWheelDelta(pt.x, pt.y, delta);
 		break;
 	}
-	// End Mouse
+					  // End Mouse
 
-	// Handle Raw Input
+					  // Handle Raw Input
 	case WM_INPUT: {
 		UINT size;
 
@@ -248,7 +248,6 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			nullptr,
 			&size,
 			sizeof(RAWINPUTHEADER)) == -1) {
-
 			// Something whent wrong ignore this input
 			break;
 		}
@@ -259,7 +258,6 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			raw_buffer.data(),
 			&size,
 			sizeof(RAWINPUTHEADER)) != size) {
-
 			// Something whent wrong ignore this input
 			break;
 		}

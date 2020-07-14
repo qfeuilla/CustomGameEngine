@@ -6,9 +6,20 @@
 #include "WndException.h"
 #include <d3d11.h>
 #include <wrl.h>
+#include <d3dcompiler.h>
+#include <DirectXMath.h>
+#include <memory>
+#include <random>
+
+#ifdef DEBUG
+#define IS_DEBUG 1
+#else
+#define IS_DEBUG 0
+#endif
 
 class Graphics
 {
+	friend class Bindable;
 public:
 	class Exception : public WndException {
 		using WndException::WndException;
@@ -37,10 +48,13 @@ public:
 	void EndFrame();
 	void ClearBuffer(float red, float green, float blue) noexcept;
 
-	void DrawTestTriangle(float angle, float x, float y);
+	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
+	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
+	DirectX::XMMATRIX GetProjection() const noexcept;
 
 private:
-	
+	DirectX::XMMATRIX projection;
+
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;

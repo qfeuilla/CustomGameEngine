@@ -1,7 +1,2 @@
 ﻿  App.cpp
-  Graphics.cpp
-  Window.cpp
-  main.cpp
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(90,1): warning C4297: 'Window::SetTitle': function assumed not to throw an exception but does
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(90,1): message : __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe

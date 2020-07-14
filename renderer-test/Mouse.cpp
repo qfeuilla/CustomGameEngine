@@ -69,7 +69,6 @@ void Mouse::OnMouseMove(int newx, int newy) noexcept {
 	TrimBuffer();
 }
 
-
 void Mouse::OnMouseLeave() noexcept {
 	isInWindow = false;
 

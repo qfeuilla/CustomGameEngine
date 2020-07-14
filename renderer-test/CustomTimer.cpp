@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-CustomTimer::CustomTimer() noexcept { 
+CustomTimer::CustomTimer() noexcept {
 	last = steady_clock::now();
 }
 

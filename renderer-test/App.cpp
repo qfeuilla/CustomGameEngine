@@ -2,8 +2,24 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include "Box.h"
+#include <memory>
 
-App::App() : wnd(800, 600, "3D Game Engine") { }
+App::App() : wnd(800, 600, "3D Game Engine") {
+	std::mt19937 rng(std::random_device{}());
+	std::uniform_real_distribution<float> adist(0.0f, 3.1415f * 2.0f);
+	std::uniform_real_distribution<float> ddist(0.0f, 3.1415f * 2.0f);
+	std::uniform_real_distribution<float> odist(0.0f, 3.1415f * 0.3f);
+	std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
+	for (auto i = 0; i < 80; i++)
+	{
+		boxes.push_back(std::make_unique<Box>(
+			wnd.Gfx(), rng, adist,
+			ddist, odist, rdist
+			));
+	}
+	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
+}
 
 int App::Start() {
 	while (true) {
@@ -16,16 +32,13 @@ int App::Start() {
 }
 
 void App::Update() {
-	wnd.Gfx().ClearBuffer(0.7f, 0.7f, 1.0f);
-	wnd.Gfx().DrawTestTriangle(
-		-timer.PeekLastMark(),
-		0.0f,
-		0.0f
-	);
-	wnd.Gfx().DrawTestTriangle(timer.PeekLastMark(), 
-		(wnd.mouse.GetPosX() / (wnd.width / 2)) - 1,
-		-((wnd.mouse.GetPosY() / (wnd.height / 2)) - 1));
-	ShowRawInputData();
+	auto dt = timer.MarkTime();
+	wnd.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
+	for (auto& b : boxes)
+	{
+		b->Update(dt);
+		b->Draw(wnd.Gfx());
+	}
 	wnd.Gfx().EndFrame();
 }
 
@@ -43,3 +56,5 @@ void App::ShowRawInputData() {
 	auto title = oss.str();
 	wnd.SetTitle(title.c_str());
 }
+
+App::~App() {}

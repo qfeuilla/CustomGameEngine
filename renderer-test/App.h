@@ -11,6 +11,7 @@ public:
 	App();
 
 	int Start();
+	~App();
 private:
 	void Update();
 	void ShowRawInputData();
@@ -18,6 +19,7 @@ private:
 
 	Window wnd;
 	CustomTimer timer;
+	std::vector<std::unique_ptr<class Box>> boxes;
 };
 
 #endif

@@ -2,6 +2,7 @@
 #include <sstream>
 #include "resource.h"
 #include "WindowsMessageMap.h"
+#include "WindowsThrowMacros.h"
 
 // Window Class Stuff
 Window::WindowClass Window::WindowClass::wnd_class;
@@ -211,6 +212,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_LBUTTONUP: {
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftRelease(pt.x, pt.y);
+		SetForegroundWindow(hWnd);
 		break;
 	}
 	case WM_RBUTTONUP: {

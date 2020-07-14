@@ -1,25 +1,13 @@
-﻿  App.cpp
+﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PixelShader.cso
+  App.cpp
   Bindable.cpp
   Box.cpp
-  CustomTimer.cpp
   Drawable.cpp
-  Graphics.cpp
   IndexBuffer.cpp
   InputLayout.cpp
-  Keyboard.cpp
-  Mouse.cpp
   PixelShader.cpp
   Topology.cpp
   TransformCbuf.cpp
   VertexBuffer.cpp
   VertexShader.cpp
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Mouse.cpp(9,9): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Mouse.cpp(13,9): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
-  Window.cpp
-  WindowsMessageMap.cpp
-  WndException.cpp
-  dxerr.cpp
-  main.cpp
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(90,1): warning C4297: 'Window::SetTitle': function assumed not to throw an exception but does
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(90,1): message : __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe

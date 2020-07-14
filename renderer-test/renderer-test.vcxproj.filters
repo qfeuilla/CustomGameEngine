@@ -31,6 +31,9 @@
     <Filter Include="Fichiers sources\Drawable">
       <UniqueIdentifier>{7a6cd681-a74f-4457-a60e-29824b4d4014}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Geometry">
+      <UniqueIdentifier>{30779a8a-6a8b-457a-96d7-63cd81b95fc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -172,6 +175,27 @@
     </ClInclude>
     <ClInclude Include="DrawableBase.h">
       <Filter>Fichiers d%27en-tête\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexedTriangleList.h">
+      <Filter>Fichiers d%27en-tête\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Cone.h">
+      <Filter>Fichiers d%27en-tête\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Fichiers d%27en-tête\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Fichiers d%27en-tête\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Prism.h">
+      <Filter>Fichiers d%27en-tête\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Fichiers d%27en-tête\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

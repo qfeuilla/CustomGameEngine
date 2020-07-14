@@ -98,6 +98,7 @@ Box::Box(Graphics& gfx,
 	{
 		SetIndexFromStatic();
 	}
+	// Only transform isn't share between boxes
 	AddBind(std::make_unique<TransformCbuf>(gfx, *this));
 }
 

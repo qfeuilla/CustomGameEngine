@@ -108,6 +108,21 @@
     <ClCompile Include="Box.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Surface.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIPlusManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Sheet.cpp">
+      <Filter>Fichiers sources\3dObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -215,6 +230,21 @@
     <ClInclude Include="Box.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Surface.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GDIPlusManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Sheet.h">
+      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="renderer-test.rc">
@@ -223,6 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\ressources\icon.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Images\kappa50.png">
       <Filter>Fichiers de ressources</Filter>
     </Image>
   </ItemGroup>
@@ -237,6 +270,12 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="ColorIndexVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturePS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="TextureVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

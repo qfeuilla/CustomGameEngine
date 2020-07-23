@@ -1,19 +1,2 @@
-﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\ColorBlendPS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\ColorBlendVS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\ColorIndexPS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\ColorIndexVS.cso
-  App.cpp
-  Bindable.cpp
-  Box.cpp
-  Drawable.cpp
-  IndexBuffer.cpp
-  InputLayout.cpp
-  main.cpp
-  Melon.cpp
-  PixelShader.cpp
-  Pyramid.cpp
-  Topology.cpp
-  TransformCbuf.cpp
-  VertexBuffer.cpp
-  VertexShader.cpp
+﻿  Sampler.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

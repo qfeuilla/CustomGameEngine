@@ -23,7 +23,7 @@ private:
 	CustomTimer timer;
 	std::vector<std::unique_ptr<class Drawable>> drawables;
 	static constexpr size_t nDrawables = 180;
-	bool show_demo = true;
+	float sim_speed = 1.0f;
 };
 
 #endif

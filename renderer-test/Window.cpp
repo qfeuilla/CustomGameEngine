@@ -159,6 +159,8 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		return true;
 	}
 
+	const auto imio = ImGui::GetIO();
+
 	switch (msg) {
 	case WM_CLOSE:
 		PostQuitMessage(0);
@@ -172,6 +174,10 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_KEYDOWN:
 		// Siskey is used to track ALT key
 	case WM_SYSKEYDOWN:
+		// stifle this keyboard message if imgui wants to capture
+		if (imio.WantCaptureKeyboard)
+			break;
+
 		// Filter multiple key press (like WASD control)
 		if (keyBrd.AutorepeatIsEnable() || !(lParam & 0x40000000)) {
 			keyBrd.OnKeyPressed(static_cast<unsigned char>(wParam));
@@ -179,15 +185,21 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		break;
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
+		if (imio.WantCaptureKeyboard)
+			break;
 		keyBrd.OnKeyReleased(static_cast<unsigned char>(wParam));
 		break;
 	case WM_CHAR:
+		if (imio.WantCaptureKeyboard)
+			break;
 		keyBrd.OnChar(static_cast<unsigned char>(wParam));
 		break;
 		// End Keyboard
 
 		// Mouse controll
 	case WM_MOUSEMOVE: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 
 		// If mouse in client region
@@ -211,37 +223,51 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		break;
 	}
 	case WM_LBUTTONDOWN: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_RBUTTONDOWN: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_LBUTTONUP: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftRelease(pt.x, pt.y);
 		SetForegroundWindow(hWnd);
 		break;
 	}
 	case WM_RBUTTONUP: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightRelease(pt.x, pt.y);
 		break;
 	}
 	case WM_MBUTTONDOWN: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnWheelPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_MBUTTONUP: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnWheelRelease(pt.x, pt.y);
 		break;
 	}
 	case WM_MOUSEWHEEL: {
+		if (imio.WantCaptureKeyboard)
+			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		const int delta = GET_WHEEL_DELTA_WPARAM(wParam);
 		mouse.OnWheelDelta(pt.x, pt.y, delta);

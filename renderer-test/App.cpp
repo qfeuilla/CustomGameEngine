@@ -11,6 +11,8 @@
 #include "Surface.h"
 #include "Sheet.h"
 #include "GDIPlusManager.h"
+#include "SkinnedBox.h"
+#include "imgui/imgui.h"
 
 GDIPlusManager gdip_man;
 
@@ -49,6 +51,11 @@ App::App()
 					gfx, rng, adist, ddist,
 					odist, rdist
 					);
+			case 4:
+				return std::make_unique<SkinnedBox>(
+					gfx, rng, adist, ddist,
+					odist, rdist
+					);
 			default:
 				assert(false && "bad drawable type in factory");
 				return {};
@@ -64,7 +71,7 @@ App::App()
 		std::uniform_real_distribution<float> bdist{ 0.4f,3.0f };
 		std::uniform_int_distribution<int> latdist{ 5,20 };
 		std::uniform_int_distribution<int> longdist{ 10,40 };
-		std::uniform_int_distribution<int> typedist{ 0,3 };
+		std::uniform_int_distribution<int> typedist{ 0,4 };
 	};
 
 	Factory f(wnd.Gfx());
@@ -87,12 +94,24 @@ int App::Start() {
 
 void App::Update() {
 	auto dt = timer.MarkTime();
-	wnd.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
+	if (wnd.keyBrd.KeyIsPressed(VK_SPACE)) {
+		wnd.Gfx().DisableImgui();
+	}
+	else {
+		wnd.Gfx().EnableImgui();
+	}
+	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
+
 	for (auto& d : drawables)
 	{
 		d->Update(wnd.keyBrd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
 		d->Draw(wnd.Gfx());
 	}
+
+	if (show_demo) {
+		ImGui::ShowDemoWindow(&show_demo);
+	}
+
 	wnd.Gfx().EndFrame();
 }
 

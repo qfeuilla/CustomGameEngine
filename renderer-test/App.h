@@ -4,6 +4,7 @@
 #pragma once
 #include "Window.h"
 #include "CustomTimer.h"
+#include "ImguiManager.h"
 
 class App
 {
@@ -13,6 +14,7 @@ public:
 	int Start();
 	~App();
 private:
+	ImguiManager imgui;
 	void Update();
 	void ShowRawInputData();
 	int x = 0, y = 0;
@@ -21,6 +23,7 @@ private:
 	CustomTimer timer;
 	std::vector<std::unique_ptr<class Drawable>> drawables;
 	static constexpr size_t nDrawables = 180;
+	bool show_demo = true;
 };
 
 #endif

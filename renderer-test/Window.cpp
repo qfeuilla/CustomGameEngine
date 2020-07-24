@@ -3,6 +3,7 @@
 #include "resource.h"
 #include "WindowsMessageMap.h"
 #include "WindowsThrowMacros.h"
+#include "imgui/imgui_impl_win32.h"
 
 // Window Class Stuff
 Window::WindowClass Window::WindowClass::wnd_class;
@@ -68,6 +69,9 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 	// Newly created windows start off as hidden
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 
+	// Init imgui Win
+	ImGui_ImplWin32_Init(hWnd);
+
 	pGfx = std::make_unique<Graphics>(hWnd);
 
 	// Register Mouse as raw input device
@@ -82,6 +86,7 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 }
 
 Window::~Window() {
+	ImGui_ImplWin32_Shutdown();
 	DestroyWindow(hWnd);
 }
 
@@ -148,6 +153,12 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	static WindowsMessageMap wmm;
 	OutputDebugString(wmm(msg, lParam, wParam).c_str());
 	*/
+
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+	{
+		return true;
+	}
+
 	switch (msg) {
 	case WM_CLOSE:
 		PostQuitMessage(0);

@@ -18,7 +18,7 @@ GDIPlusManager gdip_man;
 
 App::App()
 	:
-	wnd(800, 600, "The Donkey Fart Box")
+	wnd(WIDTH, HEIGHT, "The Donkey Fart Box")
 {
 	class Factory
 	{
@@ -77,10 +77,9 @@ App::App()
 	Factory f(wnd.Gfx());
 	drawables.reserve(nDrawables);
 	std::generate_n(std::back_inserter(drawables), nDrawables, f);
-
+	// wnd.Gfx().SetCamera(DirectX::XMMatrixTranslation(0.0f, 0.0f, 20.0f));
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
 }
-
 
 int App::Start() {
 	while (true) {
@@ -95,7 +94,7 @@ int App::Start() {
 void App::Update() {
 	auto dt = timer.MarkTime() * sim_speed;
 	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
-
+	wnd.Gfx().SetCamera(cam.GetMatrix());
 	for (auto& d : drawables)
 	{
 		d->Update(wnd.keyBrd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
@@ -107,6 +106,10 @@ void App::Update() {
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
 	ImGui::End();
+
+	// imgui window to control camera
+	cam.SpawnControlWindow();
+
 	wnd.Gfx().EndFrame();
 }
 

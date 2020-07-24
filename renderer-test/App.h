@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "CustomTimer.h"
 #include "ImguiManager.h"
+#include "Camera.h"
 
 class App
 {
@@ -24,6 +25,7 @@ private:
 	std::vector<std::unique_ptr<class Drawable>> drawables;
 	static constexpr size_t nDrawables = 180;
 	float sim_speed = 1.0f;
+	Camera cam;
 };
 
 #endif

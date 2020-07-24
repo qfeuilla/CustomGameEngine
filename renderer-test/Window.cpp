@@ -198,7 +198,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 
 		// Mouse controll
 	case WM_MOUSEMOVE: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 
@@ -223,21 +223,21 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		break;
 	}
 	case WM_LBUTTONDOWN: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_RBUTTONDOWN: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_LBUTTONUP: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftRelease(pt.x, pt.y);
@@ -245,28 +245,28 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		break;
 	}
 	case WM_RBUTTONUP: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightRelease(pt.x, pt.y);
 		break;
 	}
 	case WM_MBUTTONDOWN: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnWheelPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_MBUTTONUP: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnWheelRelease(pt.x, pt.y);
 		break;
 	}
 	case WM_MOUSEWHEEL: {
-		if (imio.WantCaptureKeyboard)
+		if (imio.WantCaptureMouse)
 			break;
 		const POINTS pt = MAKEPOINTS(lParam);
 		const int delta = GET_WHEEL_DELTA_WPARAM(wParam);

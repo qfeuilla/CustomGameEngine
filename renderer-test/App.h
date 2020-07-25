@@ -7,6 +7,7 @@
 #include "ImguiManager.h"
 #include "Camera.h"
 #include "PointLight.h"
+#include <set>
 
 class App
 {
@@ -18,6 +19,9 @@ public:
 private:
 	ImguiManager imgui;
 	void Update();
+	void SpawnSimulationWindow() noexcept;
+	void SpawnBoxWindowManagerWindow() noexcept;
+	void SpawnBoxWindows() noexcept;
 	void ShowRawInputData();
 	int x = 0, y = 0;
 
@@ -27,7 +31,10 @@ private:
 	static constexpr size_t nDrawables = 180;
 	float sim_speed = 1.0f;
 	PointLight light;
+	std::vector<class Box*> boxes;
 	Camera cam;
+	std::optional<int> comboBoxIndex;
+	std::set<int> boxControlIds;
 };
 
 #endif

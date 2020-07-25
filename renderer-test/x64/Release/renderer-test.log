@@ -1,35 +1,5 @@
 ﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongVS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\SolidPS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\SolidVS.cso
   App.cpp
-  Bindable.cpp
-  Box.cpp
-  Camera.cpp
-  Drawable.cpp
-  dxerr.cpp
-  GDIPlusManager.cpp
-  Graphics.cpp
-  imgui_impl_dx11.cpp
-  imgui_impl_win32.cpp
-  IndexBuffer.cpp
-  InputLayout.cpp
-  main.cpp
-  PixelShader.cpp
   PointLight.cpp
-  Pyramid.cpp
-  Sampler.cpp
-  Sheet.cpp
-  SkinnedBox.cpp
-  SolidSphere.cpp
-  Surface.cpp
-  Texture.cpp
-  Topology.cpp
-  TransformCbuf.cpp
-  VertexBuffer.cpp
-  VertexShader.cpp
-  Window.cpp
-  WindowsMessageMap.cpp
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(95,1): warning C4297: 'Window::SetTitle': function assumed not to throw an exception but does
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(95,1): message : __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+  main.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

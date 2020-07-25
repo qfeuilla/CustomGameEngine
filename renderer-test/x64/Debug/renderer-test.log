@@ -1,3 +1,5 @@
-﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPS.cso
-  TransformCbuf.cpp
+﻿  App.cpp
+  Box.cpp
+  PointLight.cpp
+  main.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe

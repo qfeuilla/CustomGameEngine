@@ -1,5 +1,7 @@
-﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\BlendedPhongPS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\BlendedPhongVS.cso
+﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\TexturedPhongPS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\TexturedPhongVS.cso
   App.cpp
+  Box.cpp
   Pyramid.cpp
+  SkinnedBox.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

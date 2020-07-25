@@ -317,6 +317,9 @@
     <ClInclude Include="SolidSphere.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="renderer-test.rc">

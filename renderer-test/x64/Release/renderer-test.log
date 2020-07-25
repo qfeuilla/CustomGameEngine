@@ -1,10 +1,6 @@
-﻿  App.cpp
+﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPS.cso
+  App.cpp
   Box.cpp
-  Camera.cpp
   PointLight.cpp
-  Pyramid.cpp
-  SkinnedBox.cpp
-  SolidSphere.cpp
-  TransformCbuf.cpp
   main.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

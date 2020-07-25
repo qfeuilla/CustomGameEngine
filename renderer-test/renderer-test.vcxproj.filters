@@ -162,6 +162,9 @@
     <ClCompile Include="SolidSphere.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>Fichiers sources\3dObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -320,6 +323,9 @@
     <ClInclude Include="TestObject.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="renderer-test.rc">
@@ -357,6 +363,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="SolidVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="IndexedPhongPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

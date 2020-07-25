@@ -129,9 +129,6 @@
     <ClCompile Include="Sampler.cpp">
       <Filter>Fichiers sources\Bindable</Filter>
     </ClCompile>
-    <ClCompile Include="Sheet.cpp">
-      <Filter>Fichiers sources\3dObjects</Filter>
-    </ClCompile>
     <ClCompile Include="SkinnedBox.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
@@ -280,9 +277,6 @@
     </ClInclude>
     <ClInclude Include="Sampler.h">
       <Filter>Fichiers d%27en-tête\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="Sheet.h">
-      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
     <ClInclude Include="SkinnedBox.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>

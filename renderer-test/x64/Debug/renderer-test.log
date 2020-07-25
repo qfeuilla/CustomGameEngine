@@ -1,5 +1,5 @@
 ﻿  App.cpp
-  Box.cpp
+  Camera.cpp
   PointLight.cpp
   main.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe

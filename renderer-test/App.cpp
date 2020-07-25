@@ -64,7 +64,7 @@ void App::Update() {
 	auto dt = timer.MarkTime() * sim_speed;
 	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
 	wnd.Gfx().SetCamera(cam.GetMatrix());
-	light.Bind(wnd.Gfx());
+	light.Bind(wnd.Gfx(), cam.GetMatrix());
 
 	for (auto& d : drawables)
 	{
@@ -74,7 +74,7 @@ void App::Update() {
 	light.Draw(wnd.Gfx());
 
 	if (ImGui::Begin("Simulation Speed")) {
-		ImGui::SliderFloat("Speed Factor", &sim_speed, 0.0f, 20.0f);
+		ImGui::SliderFloat("Speed Factor", &sim_speed, 0.0f, 6.0f, "%.4f", 3.2f);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
 	ImGui::End();

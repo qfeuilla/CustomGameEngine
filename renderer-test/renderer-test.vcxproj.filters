@@ -54,16 +54,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="WindowsMessageMap.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="WndException.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
@@ -73,9 +67,6 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CustomTimer.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
@@ -165,18 +156,24 @@
     <ClCompile Include="Cylinder.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
+    <ClCompile Include="CustomTimer.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="WndException.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpTest.cpp">
+      <Filter>Fichiers sources\3dObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="CustomWindows.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="WndException.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -189,9 +186,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="App.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomTimer.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
@@ -244,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="IndexedTriangleList.h">
       <Filter>Fichiers d%27en-tête\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomMath.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Cone.h">
       <Filter>Fichiers d%27en-tête\Geometry</Filter>
@@ -320,10 +311,25 @@
     <ClInclude Include="SolidSphere.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
-    <ClInclude Include="TestObject.h">
+    <ClInclude Include="Cylinder.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Cylinder.h">
+    <ClInclude Include="CustomMath.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomTimer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomWindows.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="WndException.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpTest.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
   </ItemGroup>

@@ -100,7 +100,7 @@ void App::Update() {
 	{
 		if (!wnd.CursorEnabled())
 		{
-			cam.Rotate(delta->x, delta->y);
+			cam.Rotate((float)delta->x, (float)delta->y);
 		}
 	}
 

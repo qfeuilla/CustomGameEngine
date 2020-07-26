@@ -1,5 +1,6 @@
 ﻿  App.cpp
-  Camera.cpp
+  Mesh.cpp
+  main.cpp
 C:\Users\quent\Desktop\CustomGameEngine\renderer-test\App.cpp(18,13): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\quent\Desktop\CustomGameEngine\renderer-test\App.cpp(18,6): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\quent\Desktop\CustomGameEngine\renderer-test\App.cpp(103,30): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data

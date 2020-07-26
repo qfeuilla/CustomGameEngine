@@ -20,7 +20,7 @@ public:
 private:
 	ImguiManager imgui;
 	void Update();
-	void ShowModelWindow();
+	void ShowImguiDemoWindow();
 	void ShowRawInputData();
 	int x = 0, y = 0;
 
@@ -30,15 +30,6 @@ private:
 	PointLight light;
 	Camera cam;
 	Model nano;
-	struct
-	{
-		float roll = 0.0f;
-		float pitch = 0.0f;
-		float yaw = 0.0f;
-		float x = 0.0f;
-		float y = 0.0f;
-		float z = 0.0f;
-	} pos;
 };
 
 #endif

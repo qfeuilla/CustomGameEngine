@@ -19,6 +19,8 @@
 
 GDIPlusManager gdip_man;
 
+namespace dx = DirectX;
+
 App::App()
 	:
 	wnd(WIDTH, HEIGHT, "The Donkey Fart Box"),

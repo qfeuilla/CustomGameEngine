@@ -1,6 +1,7 @@
 #include "AssimpTest.h"
 #include "BindableBase.h"
 #include "GraphicsThrowMacros.h"
+#include "Vertex.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -19,24 +20,22 @@ AssimpTest::AssimpTest(Graphics& gfx, std::mt19937& rng,
 
 	if (!IsStaticInitialized())
 	{
-		struct Vertex
-		{
-			dx::XMFLOAT3 pos;
-			dx::XMFLOAT3 n;
-		};
-
+		using dynamical::VertexLayout;
+		dynamical::VertexBuffer vbuf(std::move(
+			VertexLayout{}
+			.Append<VertexLayout::Position3D>()
+			.Append<VertexLayout::Normal>()
+		));
 		Assimp::Importer imp;
 		const auto pModel = imp.ReadFile("models\\suzanne.obj", 0);
 		const auto pMesh = pModel->mMeshes[0];
 
-		std::vector<Vertex> vertices;
-		vertices.reserve(pMesh->mNumVertices);
 		for (unsigned int i = 0; i < pMesh->mNumVertices; i++)
 		{
-			vertices.push_back({
-				{ pMesh->mVertices[i].x * scale,pMesh->mVertices[i].y * scale,pMesh->mVertices[i].z * scale },
+			vbuf.EmplaceBack(
+				dx::XMFLOAT3{ pMesh->mVertices[i].x * scale,pMesh->mVertices[i].y * scale,pMesh->mVertices[i].z * scale },
 				*reinterpret_cast<dx::XMFLOAT3*>(&pMesh->mNormals[i])
-				});
+			);
 		}
 
 		std::vector<unsigned short> indices;
@@ -50,7 +49,7 @@ AssimpTest::AssimpTest(Graphics& gfx, std::mt19937& rng,
 			indices.push_back(face.mIndices[2]);
 		}
 
-		AddStaticBind(std::make_unique<VertexBuffer>(gfx, vertices));
+		AddStaticBind(std::make_unique<VertexBuffer>(gfx, vbuf));
 
 		AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, indices));
 

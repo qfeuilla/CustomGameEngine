@@ -19,6 +19,7 @@ App::App()
 	light(wnd.Gfx()),
 	nano(wnd.Gfx(), "Models\\nano_hierarchy.gltf")
 {
+	wnd.DisableCursor();
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
 }
 

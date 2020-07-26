@@ -17,6 +17,8 @@ public:
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
 	void SetTitle(const std::string& title) noexcept;
+	void EnableCursor() noexcept;
+	void DisableCursor() noexcept;
 	static std::optional<int> ProcessMessages() noexcept;
 	Graphics& Gfx();
 
@@ -66,6 +68,14 @@ private:
 		HINSTANCE h_inst;
 	};
 
+	void ConfineCursor() noexcept;
+	void FreeCursor() noexcept;
+	void ShowCursor() noexcept;
+	void HideCursor() noexcept;
+	void EnableImGuiMouse() noexcept;
+	void DisableImGuiMouse() noexcept;
+
+	bool cursorEnabled = false;
 	// Msg Handlers
 	static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 	static LRESULT CALLBACK HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;

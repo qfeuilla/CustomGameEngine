@@ -168,6 +168,9 @@
     <ClCompile Include="AssimpTest.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -333,6 +336,9 @@
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

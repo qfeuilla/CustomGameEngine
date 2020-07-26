@@ -1,8 +1,4 @@
-﻿  AssimpTest.cpp
-  Box.cpp
-  Cylinder.cpp
-  Pyramid.cpp
-  SolidSphere.cpp
-  SkinnedBox.cpp
-  VertexBuffer.cpp
+﻿  App.cpp
+  Model.cpp
+  main.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

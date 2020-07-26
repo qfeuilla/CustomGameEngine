@@ -2,7 +2,6 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
-#include "AssimpTest.h"
 #include <algorithm>
 #include "CustomMath.h"
 #include <memory>
@@ -20,7 +19,7 @@ App::App()
 	light(wnd.Gfx()),
 	nano(wnd.Gfx(), "Models\\nano_hierarchy.gltf")
 {
-	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 80.0f));
+	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
 }
 
 int App::Start() {
@@ -44,7 +43,6 @@ void App::Update() {
 	// imgui windows
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
-	ShowImguiDemoWindow();
 	nano.ShowWindow();
 
 	// present

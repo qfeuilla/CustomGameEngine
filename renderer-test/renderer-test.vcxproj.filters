@@ -153,9 +153,6 @@
     <ClCompile Include="WndException.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="AssimpTest.cpp">
-      <Filter>Fichiers sources\3dObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -227,18 +224,6 @@
     <ClInclude Include="IndexedTriangleList.h">
       <Filter>Fichiers d%27en-tête\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Cone.h">
-      <Filter>Fichiers d%27en-tête\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Fichiers d%27en-tête\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Fichiers d%27en-tête\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Prism.h">
-      <Filter>Fichiers d%27en-tête\Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Fichiers d%27en-tête\Geometry</Filter>
     </ClInclude>
@@ -299,14 +284,8 @@
     <ClInclude Include="CustomWindows.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="TestObject.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="WndException.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="AssimpTest.h">
-      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Fichiers d%27en-tête</Filter>

@@ -58,8 +58,8 @@
 #define IS_DEBUG 0
 #endif
 
-#define WIDTH 1600u
-#define HEIGHT 1200u
+#define WIDTH 1320.0f
+#define HEIGHT 965.0f
 
 #include <Windows.h>
 

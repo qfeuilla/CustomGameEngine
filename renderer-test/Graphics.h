@@ -12,6 +12,7 @@
 #include <random>
 #include "GraphicsThrowMacros.h"
 #include "imgui/imgui_impl_dx11.h"
+#include "ConditionalNoexcept.h"
 
 #ifdef DEBUG
 #define IS_DEBUG 1
@@ -19,9 +20,14 @@
 #define IS_DEBUG 0
 #endif
 
+namespace Bind
+{
+	class Bindable;
+}
+
 class Graphics
 {
-	friend class Bindable;
+	friend class Bind::Bindable;
 public:
 	class Exception : public WndException {
 		using WndException::WndException;
@@ -50,7 +56,7 @@ public:
 	void EndFrame();
 	void BeginFrame(float red, float green, float blue) noexcept;
 
-	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
+	void DrawIndexed(UINT count) noxnd;
 	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
 

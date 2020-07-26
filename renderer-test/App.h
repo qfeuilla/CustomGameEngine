@@ -8,7 +8,7 @@
 #include "Camera.h"
 #include "PointLight.h"
 #include <set>
-#include "Model.h"
+#include "Mesh.h"
 
 class App
 {

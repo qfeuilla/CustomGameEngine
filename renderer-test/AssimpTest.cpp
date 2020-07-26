@@ -1,10 +1,12 @@
 #include "AssimpTest.h"
-#include "BindableBase.h"
+#include "BindableCommon.h"
 #include "GraphicsThrowMacros.h"
 #include "Vertex.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+
+using namespace Bind;
 
 AssimpTest::AssimpTest(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist,

@@ -1,4 +1,3 @@
-﻿  App.cpp
-  Model.cpp
-  main.cpp
+﻿  AssimpTest.cpp
+  Mesh.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

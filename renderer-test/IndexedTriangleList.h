@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <DirectXMath.h>
+#include "ConditionalNoexcept.h"
 
 template<class T>
 class IndexedTriangleList
@@ -28,7 +29,7 @@ public:
 	}
 
 	// asserts face-independent vertices w/ normals cleared to zero
-	void SetNormalsIndependentFlat() noexcept(!IS_DEBUG)
+	void SetNormalsIndependentFlat() noxnd
 	{
 		using namespace DirectX;
 		assert(indices.size() % 3 == 0 && indices.size() > 0);

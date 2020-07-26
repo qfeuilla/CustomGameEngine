@@ -2,10 +2,6 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
-#include "Box.h"
-#include "Cylinder.h"
-#include "Pyramid.h"
-#include "SkinnedBox.h"
 #include "AssimpTest.h"
 #include <algorithm>
 #include "CustomMath.h"

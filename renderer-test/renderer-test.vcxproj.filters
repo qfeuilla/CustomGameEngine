@@ -102,12 +102,6 @@
     <ClCompile Include="Drawable.cpp">
       <Filter>Fichiers sources\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="Pyramid.cpp">
-      <Filter>Fichiers sources\3dObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Fichiers sources\3dObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Surface.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -119,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="Sampler.cpp">
       <Filter>Fichiers sources\Bindable</Filter>
-    </ClCompile>
-    <ClCompile Include="SkinnedBox.cpp">
-      <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
       <Filter>Fichiers sources\imgui</Filter>
@@ -153,9 +144,6 @@
     <ClCompile Include="SolidSphere.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Cylinder.cpp">
-      <Filter>Fichiers sources\3dObjects</Filter>
-    </ClCompile>
     <ClCompile Include="CustomTimer.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -168,7 +156,7 @@
     <ClCompile Include="AssimpTest.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
+    <ClCompile Include="Mesh.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -204,9 +192,6 @@
       <Filter>Fichiers d%27en-tête\Macros</Filter>
     </ClInclude>
     <ClInclude Include="Bindable.h">
-      <Filter>Fichiers d%27en-tête\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="BindableBase.h">
       <Filter>Fichiers d%27en-tête\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffers.h">
@@ -257,12 +242,6 @@
     <ClInclude Include="Sphere.h">
       <Filter>Fichiers d%27en-tête\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Pyramid.h">
-      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Surface.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -274,9 +253,6 @@
     </ClInclude>
     <ClInclude Include="Sampler.h">
       <Filter>Fichiers d%27en-tête\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="SkinnedBox.h">
-      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>Fichiers d%27en-tête\imgui</Filter>
@@ -314,9 +290,6 @@
     <ClInclude Include="SolidSphere.h">
       <Filter>Fichiers d%27en-tête\3dObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Cylinder.h">
-      <Filter>Fichiers d%27en-tête\3dObjects</Filter>
-    </ClInclude>
     <ClInclude Include="CustomMath.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -338,7 +311,16 @@
     <ClInclude Include="Vertex.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="BindableCommon.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionalNoexcept.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -356,18 +338,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="ColorBlendPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="ColorBlendVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TexturePS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TextureVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="PhongPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
@@ -378,21 +348,6 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="SolidVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="IndexedPhongPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="BlendedPhongPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="BlendedPhongVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TexturedPhongPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TexturedPhongVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

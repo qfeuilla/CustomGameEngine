@@ -21,8 +21,7 @@ private:
 	ImguiManager imgui;
 	void Update();
 	void ShowImguiDemoWindow();
-	void ShowRawInputWindow();
-	int x = 0, y = 0;
+	bool showDemoWindow = false;
 
 	Window wnd;
 	CustomTimer timer;

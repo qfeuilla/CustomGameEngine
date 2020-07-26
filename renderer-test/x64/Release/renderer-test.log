@@ -1,12 +1,7 @@
 ﻿  App.cpp
-  Keyboard.cpp
-  Mouse.cpp
-  Window.cpp
-  main.cpp
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Mouse.cpp(9,9): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Mouse.cpp(13,9): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(95,1): warning C4297: 'Window::SetTitle': function assumed not to throw an exception but does
-C:\Users\quent\Desktop\CustomGameEngine\renderer-test\Window.cpp(95,1): message : __declspec(nothrow), throw(), noexcept(true), or noexcept was specified on the function
+  Camera.cpp
 C:\Users\quent\Desktop\CustomGameEngine\renderer-test\App.cpp(18,13): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\quent\Desktop\CustomGameEngine\renderer-test\App.cpp(18,6): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\quent\Desktop\CustomGameEngine\renderer-test\App.cpp(103,30): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+C:\Users\quent\Desktop\CustomGameEngine\renderer-test\App.cpp(103,20): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

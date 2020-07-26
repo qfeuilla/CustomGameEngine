@@ -74,10 +74,10 @@ Window::Window(int width, int height, const char* name) : width(width), height(h
 
 	pGfx = std::make_unique<Graphics>(hWnd);
 
-	// Register Mouse as raw input device
+	// register mouse raw input device
 	RAWINPUTDEVICE rid;
-	rid.usUsagePage = 0x01;
-	rid.usUsage = 0x02;
+	rid.usUsagePage = 0x01; // mouse page
+	rid.usUsage = 0x02; // mouse usage
 	rid.dwFlags = 0;
 	rid.hwndTarget = nullptr;
 	if (RegisterRawInputDevices(&rid, 1, sizeof(rid)) == FALSE) {
@@ -110,6 +110,11 @@ void Window::DisableCursor() noexcept
 	HideCursor();
 	DisableImGuiMouse();
 	ConfineCursor();
+}
+
+bool Window::CursorEnabled() const noexcept
+{
+	return cursorEnabled;
 }
 
 std::optional<int> Window::ProcessMessages() noexcept {
@@ -358,37 +363,47 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	}
 					  // End Mouse
 
-					  // Handle Raw Input
-	case WM_INPUT: {
+	/************** RAW MOUSE MESSAGES **************/
+	case WM_INPUT:
+	{
+		if (!mouse.RawEnabled())
+		{
+			break;
+		}
 		UINT size;
-
+		// first get the size of the input data
 		if (GetRawInputData(
 			reinterpret_cast<HRAWINPUT>(lParam),
 			RID_INPUT,
 			nullptr,
 			&size,
-			sizeof(RAWINPUTHEADER)) == -1) {
-			// Something whent wrong ignore this input
+			sizeof(RAWINPUTHEADER)) == -1)
+		{
+			// bail msg processing if error
 			break;
 		}
 		raw_buffer.resize(size);
+		// read in the input data
 		if (GetRawInputData(
 			reinterpret_cast<HRAWINPUT>(lParam),
 			RID_INPUT,
 			raw_buffer.data(),
 			&size,
-			sizeof(RAWINPUTHEADER)) != size) {
-			// Something whent wrong ignore this input
+			sizeof(RAWINPUTHEADER)) != size)
+		{
+			// bail msg processing if error
 			break;
 		}
-
+		// process the raw input data
 		auto& ri = reinterpret_cast<const RAWINPUT&>(*raw_buffer.data());
 		if (ri.header.dwType == RIM_TYPEMOUSE &&
-			(ri.data.mouse.lLastX != 0 || ri.data.mouse.lLastY != 0)) {
-			mouse.OnRawInputDelta(ri.data.mouse.lLastX, ri.data.mouse.lLastY);
+			(ri.data.mouse.lLastX != 0 || ri.data.mouse.lLastY != 0))
+		{
+			mouse.OnRawDelta(ri.data.mouse.lLastX, ri.data.mouse.lLastY);
 		}
 		break;
 	}
+	/************** END RAW MOUSE MESSAGES **************/
 	}
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }

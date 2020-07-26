@@ -19,7 +19,6 @@ App::App()
 	light(wnd.Gfx()),
 	nano(wnd.Gfx(), "Models\\nano_hierarchy.gltf")
 {
-	wnd.DisableCursor();
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
 }
 
@@ -41,11 +40,28 @@ void App::Update() {
 	nano.Draw(wnd.Gfx());	
 	light.Draw(wnd.Gfx());
 
+
+	while (const auto e = wnd.keyBrd.ReadKey())
+	{
+		if (e->IsPress() && e->GetCode() == VK_INSERT)
+		{
+			if (wnd.CursorEnabled()) {
+				wnd.DisableCursor();
+				wnd.mouse.EnableRaw();
+			}
+			else
+			{
+				wnd.EnableCursor();
+				wnd.mouse.DisableRaw();
+			}
+		}
+	}
+
 	// imgui windows
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	nano.ShowWindow();
-
+	ShowRawInputWindow();
 	// present
 	wnd.Gfx().EndFrame();
 }
@@ -59,20 +75,19 @@ void App::ShowImguiDemoWindow()
 	}
 }
 
-
-void App::ShowRawInputData() {
-	if (wnd.mouse.RawDeltaIsEmpty()) {
-		x = 0;
-		y = 0;
+void App::ShowRawInputWindow()
+{
+	while (const auto d = wnd.mouse.ReadRawDelta())
+	{
+		x += d->x;
+		y += d->y;
 	}
-	while (const auto d = wnd.mouse.ReadRawDelta()) {
-		x = d->x;
-		y = d->y;
+	if (ImGui::Begin("Raw Input"))
+	{
+		ImGui::Text("Tally: (%d,%d)", x, y);
+		ImGui::Text("Cursor: %s", wnd.CursorEnabled() ? "enabled" : "disabled");
 	}
-	std::ostringstream oss;
-	oss << "Raw x : " << x << "Raw y : " << y;
-	auto title = oss.str();
-	wnd.SetTitle(title.c_str());
+	ImGui::End();
 }
 
 App::~App() {}

@@ -90,13 +90,16 @@ public:
 	Mouse::Event Read() noexcept;
 	std::optional<RawDelta> ReadRawDelta() noexcept;
 	bool IsEmty() const noexcept;
-	bool RawDeltaIsEmpty() const noexcept;
 	void Clean() noexcept;
+	void EnableRaw() noexcept;
+	void DisableRaw() noexcept;
+	bool RawEnabled() const noexcept;
 
 private:
 	void OnMouseMove(int x, int y) noexcept;
 	void OnMouseLeave() noexcept;
 	void OnMouseEnter() noexcept;
+	void OnRawDelta(int dx, int dy) noexcept;
 	void OnLeftPressed(int x, int y) noexcept;
 	void OnLeftRelease(int x, int y) noexcept;
 	void OnRightPressed(int x, int y) noexcept;
@@ -106,9 +109,8 @@ private:
 	void OnWheelUp(int x, int y) noexcept;
 	void OnWheelDown(int x, int y) noexcept;
 	void TrimBuffer() noexcept;
-	void TrimRawDeltaBuffer() noexcept;
+	void TrimRawInputBuffer() noexcept;
 	void OnWheelDelta(int x, int y, int delta) noexcept;
-	void OnRawInputDelta(int x, int y) noexcept;
 
 	static constexpr unsigned int buffer_size = 16u;
 	int x;
@@ -117,9 +119,10 @@ private:
 	bool r_pressed = false;
 	bool w_pressed = false;
 	bool isInWindow = false;
+	bool rawEnabled = false;
 	int wheel_delta_carry = 0;
 	std::queue<Event> buffer;
-	std::queue<RawDelta> raw_delta_buffer;
+	std::queue<RawDelta> rawDeltaBuffer; 
 };
 
 #endif

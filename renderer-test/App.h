@@ -21,7 +21,7 @@ private:
 	ImguiManager imgui;
 	void Update();
 	void ShowImguiDemoWindow();
-	void ShowRawInputData();
+	void ShowRawInputWindow();
 	int x = 0, y = 0;
 
 	Window wnd;

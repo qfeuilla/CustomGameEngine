@@ -40,25 +40,36 @@ Mouse::Event	Mouse::Read() noexcept {
 
 std::optional<Mouse::RawDelta> Mouse::ReadRawDelta() noexcept
 {
-	if (raw_delta_buffer.empty()) {
-		return {};
+	if (rawDeltaBuffer.empty())
+	{
+		return std::nullopt;
 	}
-
-	RawDelta dt = raw_delta_buffer.front();
-	raw_delta_buffer.pop();
-	return dt;
+	const RawDelta d = rawDeltaBuffer.front();
+	rawDeltaBuffer.pop();
+	return d;
 }
 
 bool Mouse::IsEmty() const noexcept {
 	return buffer.empty();
 }
 
-bool Mouse::RawDeltaIsEmpty() const noexcept {
-	return raw_delta_buffer.empty();
-}
-
 void Mouse::Clean() noexcept {
 	buffer = std::queue<Event>();
+}
+
+void Mouse::EnableRaw() noexcept
+{
+	rawEnabled = true;
+}
+
+void Mouse::DisableRaw() noexcept
+{
+	rawEnabled = false;
+}
+
+bool Mouse::RawEnabled() const noexcept
+{
+	return rawEnabled;
 }
 
 void Mouse::OnMouseMove(int newx, int newy) noexcept {
@@ -142,12 +153,14 @@ void Mouse::TrimBuffer() noexcept {
 	}
 }
 
-void Mouse::TrimRawDeltaBuffer() noexcept {
-	while (raw_delta_buffer.size() > buffer_size)
+void Mouse::TrimRawInputBuffer() noexcept {
+	while (rawDeltaBuffer.size() > buffer_size)
 	{
-		raw_delta_buffer.pop();
+		rawDeltaBuffer.pop();
 	}
 }
+
+
 
 void Mouse::OnWheelDelta(int x, int y, int delta) noexcept {
 	wheel_delta_carry += delta;
@@ -163,7 +176,8 @@ void Mouse::OnWheelDelta(int x, int y, int delta) noexcept {
 	}
 }
 
-void Mouse::OnRawInputDelta(int x, int y) noexcept {
-	raw_delta_buffer.push({ x, y });
-	TrimRawDeltaBuffer();
+void Mouse::OnRawDelta(int dx, int dy) noexcept
+{
+	rawDeltaBuffer.push({ dx,dy });
+	TrimBuffer();
 }

@@ -164,9 +164,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WindowsMessageMap.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -317,6 +314,9 @@
     <ClInclude Include="TransformCbufDouble.h">
       <Filter>Fichiers d%27en-tête\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="WindowsMessageMap.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="renderer-test.rc">
@@ -351,6 +351,12 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="PhongVSNormalMap.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongPSNotex.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongVSNotex.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

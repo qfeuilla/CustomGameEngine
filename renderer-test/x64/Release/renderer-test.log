@@ -1,3 +1,11 @@
-﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPSNormalMap.cso
-  Camera.cpp
+﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPSSpecNormalMap.cso
+  App.cpp
+  Drawable.cpp
+  Mesh.cpp
+  PointLight.cpp
+  SolidSphere.cpp
+  TestPlane.cpp
+  TransformCbuf.cpp
+  TransformCbufDouble.cpp
+  main.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

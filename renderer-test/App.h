@@ -33,7 +33,7 @@ private:
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	Model wall;
+	Model gobber;
 };
 
 #endif

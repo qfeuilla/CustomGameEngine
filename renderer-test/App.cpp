@@ -18,7 +18,7 @@ App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
 	light(wnd.Gfx()),
-	wall(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj")
+	gobber(wnd.Gfx(), "Models\\gobber\\GoblinX.obj")
 {
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
 }
@@ -111,7 +111,7 @@ void App::Update() {
 	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
 	wnd.Gfx().SetCamera(cam.GetMatrix());
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
-	wall.Draw(wnd.Gfx());
+	gobber.Draw(wnd.Gfx());
 	light.Draw(wnd.Gfx());
 
 	// User Inputs
@@ -121,7 +121,7 @@ void App::Update() {
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	FPSCounter();
-	wall.ShowWindow("Wall");
+	gobber.ShowWindow(wnd.Gfx(), "gobber");
 
 	// present
 	wnd.Gfx().EndFrame();

@@ -90,9 +90,11 @@ Window::~Window() {
 	DestroyWindow(hWnd);
 }
 
-void Window::SetTitle(const std::string& title) noexcept {
+void Window::SetTitle(const std::string& title) noxnd {
 	if (SetWindowText(hWnd, title.c_str()) == 0) {
+#if IS_DEBUG
 		throw CHWND_LAST_EXCEPT();
+#endif
 	}
 }
 
@@ -154,7 +156,6 @@ void Window::FreeCursor() noexcept
 	ClipCursor(nullptr);
 }
 
-
 void Window::HideCursor() noexcept
 {
 	while (::ShowCursor(FALSE) >= 0);
@@ -174,7 +175,6 @@ void Window::DisableImGuiMouse() noexcept
 {
 	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NoMouse;
 }
-
 
 // Only used to setup the Window
 LRESULT CALLBACK Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept {

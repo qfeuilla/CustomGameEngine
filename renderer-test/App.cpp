@@ -15,7 +15,7 @@ namespace dx = DirectX;
 
 App::App()
 	:
-	wnd(WIDTH, HEIGHT, "The Donkey Fart Box"),
+	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
 	light(wnd.Gfx()),
 	nano(wnd.Gfx(), "Models\\nano_hierarchy.gltf")
 {
@@ -37,9 +37,8 @@ void App::Update() {
 	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
 	wnd.Gfx().SetCamera(cam.GetMatrix());
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
-	nano.Draw(wnd.Gfx());	
+	nano.Draw(wnd.Gfx());
 	light.Draw(wnd.Gfx());
-
 
 	while (const auto e = wnd.keyBrd.ReadKey())
 	{
@@ -67,7 +66,7 @@ void App::Update() {
 			break;
 		}
 	}
-	
+
 	if (!wnd.CursorEnabled())
 	{
 		if (wnd.keyBrd.KeyIsPressed('Z'))

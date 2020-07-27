@@ -14,8 +14,8 @@ namespace dx = DirectX;
 
 Graphics::Graphics(HWND hWnd) {
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc.Width = WIDTH;
-	sd.BufferDesc.Height = HEIGHT;
+	sd.BufferDesc.Width = (UINT)WIDTH;
+	sd.BufferDesc.Height = (UINT)HEIGHT;
 	sd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
 	sd.BufferDesc.RefreshRate.Numerator = 0;
 	sd.BufferDesc.RefreshRate.Denominator = 0;
@@ -67,8 +67,8 @@ Graphics::Graphics(HWND hWnd) {
 	// create depth stensil texture
 	wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
 	D3D11_TEXTURE2D_DESC descDepth = {};
-	descDepth.Width = WIDTH;
-	descDepth.Height = HEIGHT;
+	descDepth.Width = (UINT)WIDTH;
+	descDepth.Height = (UINT)HEIGHT;
 	descDepth.MipLevels = 1u;
 	descDepth.ArraySize = 1u;
 	descDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -105,7 +105,6 @@ Graphics::Graphics(HWND hWnd) {
 }
 
 void Graphics::EndFrame() {
-
 	if (imguiEnabled) {
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

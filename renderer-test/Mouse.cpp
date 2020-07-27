@@ -6,11 +6,11 @@ std::pair<int, int> Mouse::GetPos() const noexcept {
 }
 
 float Mouse::GetPosX() const noexcept {
-	return x;
+	return (float)x;
 }
 
 float Mouse::GetPosY() const noexcept {
-	return y;
+	return (float)y;
 }
 
 bool Mouse::LeftIsPressed() const noexcept {
@@ -159,8 +159,6 @@ void Mouse::TrimRawInputBuffer() noexcept {
 		rawDeltaBuffer.pop();
 	}
 }
-
-
 
 void Mouse::OnWheelDelta(int x, int y, int delta) noexcept {
 	wheel_delta_carry += delta;

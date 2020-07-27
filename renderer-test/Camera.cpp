@@ -51,7 +51,6 @@ void Camera::Reset() noexcept
 	yaw = 0.0f;
 }
 
-
 void Camera::Rotate(float dx, float dy) noexcept
 {
 	yaw = wrap_angle(yaw + dx * rotationSpeed);

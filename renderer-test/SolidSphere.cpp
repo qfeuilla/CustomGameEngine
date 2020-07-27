@@ -3,7 +3,6 @@
 #include "GraphicsThrowMacros.h"
 #include "Sphere.h"
 
-
 SolidSphere::SolidSphere(Graphics& gfx, float radius)
 {
 	namespace dx = DirectX;

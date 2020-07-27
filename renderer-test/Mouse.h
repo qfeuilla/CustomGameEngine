@@ -122,7 +122,7 @@ private:
 	bool rawEnabled = false;
 	int wheel_delta_carry = 0;
 	std::queue<Event> buffer;
-	std::queue<RawDelta> rawDeltaBuffer; 
+	std::queue<RawDelta> rawDeltaBuffer;
 };
 
 #endif

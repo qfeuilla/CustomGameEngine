@@ -17,7 +17,7 @@ App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
 	light(wnd.Gfx()),
-	nano(wnd.Gfx(), "Models\\nano_hierarchy.gltf")
+	nano(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj")
 {
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
 }

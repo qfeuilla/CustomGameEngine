@@ -9,6 +9,7 @@
 #include "PointLight.h"
 #include <set>
 #include "Mesh.h"
+#include "TestPlane.h"
 
 class App
 {
@@ -22,6 +23,9 @@ private:
 	void Update();
 	void ShowImguiDemoWindow();
 	void FPSCounter();
+	void Controls(float);
+	void FPSMouseControl();
+	void FPSKeybrdControl(float);
 	bool showDemoWindow = false;
 
 	Window wnd;
@@ -29,7 +33,7 @@ private:
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	Model nano, nano2;
+	Model wall;
 };
 
 #endif

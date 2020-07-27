@@ -18,13 +18,9 @@ App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
 	light(wnd.Gfx()),
-	nano(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj"),
-	nano2(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj")
+	wall(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj")
 {
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
-	auto a = Bind::VertexShader::Resolve(wnd.Gfx(), "PhongVS.cso");
-	auto b = Bind::Sampler::Resolve(wnd.Gfx());
-	auto c = Bind::Sampler::Resolve(wnd.Gfx());
 }
 
 int App::Start() {
@@ -37,14 +33,47 @@ int App::Start() {
 	}
 }
 
-void App::Update() {
-	auto dt = timer.MarkTime() * sim_speed;
-	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
-	wnd.Gfx().SetCamera(cam.GetMatrix());
-	light.Bind(wnd.Gfx(), cam.GetMatrix());
-	nano.Draw(wnd.Gfx());
-	nano2.Draw(wnd.Gfx());
-	light.Draw(wnd.Gfx());
+void App::FPSKeybrdControl(float dt) {
+	if (!wnd.CursorEnabled())
+	{
+		if (wnd.keyBrd.KeyIsPressed('Z'))
+		{
+			cam.Translate({ 0.0f,0.0f,dt });
+		}
+		if (wnd.keyBrd.KeyIsPressed('Q'))
+		{
+			cam.Translate({ -dt,0.0f,0.0f });
+		}
+		if (wnd.keyBrd.KeyIsPressed('S'))
+		{
+			cam.Translate({ 0.0f,0.0f,-dt });
+		}
+		if (wnd.keyBrd.KeyIsPressed('D'))
+		{
+			cam.Translate({ dt,0.0f,0.0f });
+		}
+		if (wnd.keyBrd.KeyIsPressed('E'))
+		{
+			cam.Translate({ 0.0f,dt,0.0f });
+		}
+		if (wnd.keyBrd.KeyIsPressed('A'))
+		{
+			cam.Translate({ 0.0f,-dt,0.0f });
+		}
+	}
+}
+
+void App::FPSMouseControl() {
+	while (const auto delta = wnd.mouse.ReadRawDelta())
+	{
+		if (!wnd.CursorEnabled())
+		{
+			cam.Rotate((float)delta->x, (float)delta->y);
+		}
+	}
+}
+
+void App::Controls(float dt) {
 
 	while (const auto e = wnd.keyBrd.ReadKey())
 	{
@@ -73,48 +102,27 @@ void App::Update() {
 		}
 	}
 
-	if (!wnd.CursorEnabled())
-	{
-		if (wnd.keyBrd.KeyIsPressed('Z'))
-		{
-			cam.Translate({ 0.0f,0.0f,dt });
-		}
-		if (wnd.keyBrd.KeyIsPressed('Q'))
-		{
-			cam.Translate({ -dt,0.0f,0.0f });
-		}
-		if (wnd.keyBrd.KeyIsPressed('S'))
-		{
-			cam.Translate({ 0.0f,0.0f,-dt });
-		}
-		if (wnd.keyBrd.KeyIsPressed('D'))
-		{
-			cam.Translate({ dt,0.0f,0.0f });
-		}
-		if (wnd.keyBrd.KeyIsPressed('E'))
-		{
-			cam.Translate({ 0.0f,dt,0.0f });
-		}
-		if (wnd.keyBrd.KeyIsPressed('A'))
-		{
-			cam.Translate({ 0.0f,-dt,0.0f });
-		}
-	}
+	FPSKeybrdControl(dt);
+	FPSMouseControl();
+}
 
-	while (const auto delta = wnd.mouse.ReadRawDelta())
-	{
-		if (!wnd.CursorEnabled())
-		{
-			cam.Rotate((float)delta->x, (float)delta->y);
-		}
-	}
+void App::Update() {
+	auto dt = timer.MarkTime() * sim_speed;
+	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
+	wnd.Gfx().SetCamera(cam.GetMatrix());
+	light.Bind(wnd.Gfx(), cam.GetMatrix());
+	wall.Draw(wnd.Gfx());
+	light.Draw(wnd.Gfx());
+
+	// User Inputs
+	Controls(dt);
 
 	// imgui windows
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
-	nano.ShowWindow("Model 1");
-	nano2.ShowWindow("Model 2");
 	FPSCounter();
+	wall.ShowWindow("Wall");
+
 	// present
 	wnd.Gfx().EndFrame();
 }

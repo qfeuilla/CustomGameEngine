@@ -21,6 +21,7 @@ private:
 	ImguiManager imgui;
 	void Update();
 	void ShowImguiDemoWindow();
+	void FPSCounter();
 	bool showDemoWindow = false;
 
 	Window wnd;
@@ -28,7 +29,7 @@ private:
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	Model nano;
+	Model nano, nano2;
 };
 
 #endif

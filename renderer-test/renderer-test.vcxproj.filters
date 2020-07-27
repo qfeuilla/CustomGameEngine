@@ -218,9 +218,6 @@
     <ClInclude Include="VertexShader.h">
       <Filter>Fichiers d%27en-tête\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="DrawableBase.h">
-      <Filter>Fichiers d%27en-tête\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="IndexedTriangleList.h">
       <Filter>Fichiers d%27en-tête\Geometry</Filter>
     </ClInclude>
@@ -301,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableCodex.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

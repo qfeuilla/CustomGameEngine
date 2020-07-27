@@ -8,6 +8,7 @@
 #include "Surface.h"
 #include "GDIPlusManager.h"
 #include "imgui/imgui.h"
+#include "VertexBuffer.h"
 
 GDIPlusManager gdip_man;
 
@@ -17,9 +18,13 @@ App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
 	light(wnd.Gfx()),
-	nano(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj")
+	nano(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj"),
+	nano2(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj")
 {
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
+	auto a = Bind::VertexShader::Resolve(wnd.Gfx(), "PhongVS.cso");
+	auto b = Bind::Sampler::Resolve(wnd.Gfx());
+	auto c = Bind::Sampler::Resolve(wnd.Gfx());
 }
 
 int App::Start() {
@@ -38,6 +43,7 @@ void App::Update() {
 	wnd.Gfx().SetCamera(cam.GetMatrix());
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
 	nano.Draw(wnd.Gfx());
+	nano2.Draw(wnd.Gfx());
 	light.Draw(wnd.Gfx());
 
 	while (const auto e = wnd.keyBrd.ReadKey())
@@ -106,7 +112,9 @@ void App::Update() {
 	// imgui windows
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
-	nano.ShowWindow();
+	nano.ShowWindow("Model 1");
+	nano2.ShowWindow("Model 2");
+	FPSCounter();
 	// present
 	wnd.Gfx().EndFrame();
 }
@@ -117,6 +125,14 @@ void App::ShowImguiDemoWindow()
 	{
 		ImGui::ShowDemoWindow(&showDemoWindow);
 	}
+}
+
+void App::FPSCounter()
+{
+	if (ImGui::Begin("FPS Counter : ")) {
+		ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
+	}
+	ImGui::End();
 }
 
 App::~App() {}

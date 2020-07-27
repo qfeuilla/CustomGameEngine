@@ -1,3 +1,6 @@
-﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPSSpecMap.cso
+﻿  App.cpp
+  main.cpp
   Mesh.cpp
+  SolidSphere.cpp
+  Texture.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

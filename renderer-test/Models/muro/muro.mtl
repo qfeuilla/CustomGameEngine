@@ -21,8 +21,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kn Muro_body_nm.png
-map_Kd Muro_body_dm.png
-map_Ks Muro_body_sm.png
+map_Kd Muro_body_dm_clean.png
+map_Ks Muro_body_sm_clean.png
 
 newmtl mat_head
 Ns 56.806129

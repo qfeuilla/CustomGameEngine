@@ -10,6 +10,9 @@ Ke 0.0 0.0 0.0
 Ni 1.450000
 d 0.261906
 illum 6
+map_Kn Muro_head_nm.png
+map_Kd Muro_head_dm.png
+map_Ks Muro_head_sm.png
 
 newmtl mat_body
 Ns 56.806129

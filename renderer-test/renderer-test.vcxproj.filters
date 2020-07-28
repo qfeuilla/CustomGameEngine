@@ -52,6 +52,9 @@
     <Filter Include="Fichiers sources\lights">
       <UniqueIdentifier>{558300ae-4125-4e64-b327-db1aab69f7a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader\Common">
+      <UniqueIdentifier>{966ebfaf-6166-4a92-9518-c10947b60b69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -359,5 +362,19 @@
     <FxCompile Include="PhongVSNotex.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PointLight.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="ShaderOps.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="LightVectorData.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="Transform.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
   </ItemGroup>
 </Project>

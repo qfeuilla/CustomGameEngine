@@ -1,2 +1,11 @@
 
 renderer-test/.vs/*
+renderer-test/x64/*/*
+renderer-test/x64/*
+*.mtl
+*.cso
+*.obj
+*.exe
+*.tlog
+*.idb
+*.pdb

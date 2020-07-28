@@ -1,5 +1,6 @@
 ﻿  App.cpp
-  CustomDirectXM.cpp
-  main.cpp
-  Mesh.cpp
+  Camera.cpp
+  PointLight.cpp
+  SolidSphere.cpp
+  TestPlane.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe

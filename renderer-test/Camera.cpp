@@ -51,6 +51,11 @@ void Camera::Reset() noexcept
 	yaw = 0.45f;
 }
 
+DirectX::XMFLOAT3 Camera::GetPos() const noexcept
+{
+	return pos;
+}
+
 void Camera::Rotate(float dx, float dy) noexcept
 {
 	yaw = wrap_angle(yaw + dx * rotationSpeed);

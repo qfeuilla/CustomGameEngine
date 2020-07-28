@@ -168,6 +168,12 @@
     <ClCompile Include="CustomDirectXM.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Blender.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Rasterizer.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -326,6 +332,12 @@
     <ClInclude Include="CustomDirectXM.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Blender.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Rasterizer.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="renderer-test.rc">
@@ -369,6 +381,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="PhongPSSpec.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongPSSpecNormMask.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

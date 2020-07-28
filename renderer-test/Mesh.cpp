@@ -273,6 +273,7 @@ std::unique_ptr<Mesh> Model::ParseMesh(Graphics& gfx, const aiMesh& mesh, const 
 	bool hasNormalMap = false;
 	bool hasDiffuseMap = false;
 	bool hasAlphaGloss = false;
+	bool hasAlphaDiffuse = false;
 	float shininess = 2.0f;
 	dx::XMFLOAT4 specularColor = { 0.18f,0.18f,0.18f,1.0f };
 	dx::XMFLOAT4 diffuseColor = { 0.45f,0.45f,0.85f,1.0f };
@@ -284,7 +285,9 @@ std::unique_ptr<Mesh> Model::ParseMesh(Graphics& gfx, const aiMesh& mesh, const 
 
 		if (material.GetTexture(aiTextureType_DIFFUSE, 0, &texFileName) == aiReturn_SUCCESS)
 		{
-			bindablePtrs.push_back(Texture::Resolve(gfx, rootPath + texFileName.C_Str()));
+			auto tex = Texture::Resolve(gfx, rootPath + texFileName.C_Str());
+			hasAlphaDiffuse = tex->HasAlpha();
+			bindablePtrs.push_back(std::move(tex));
 			hasDiffuseMap = true;
 		}
 		else
@@ -366,7 +369,9 @@ std::unique_ptr<Mesh> Model::ParseMesh(Graphics& gfx, const aiMesh& mesh, const 
 		auto pvsbc = pvs->GetBytecode();
 		bindablePtrs.push_back(std::move(pvs));
 
-		bindablePtrs.push_back(PixelShader::Resolve(gfx, "PhongPSSpecNormalMap.cso"));
+		bindablePtrs.push_back(PixelShader::Resolve(gfx,
+			hasAlphaDiffuse ? "PhongPSSpecNormMask.cso" : "PhongPSSpecNormalMap.cso"
+		));
 
 		bindablePtrs.push_back(InputLayout::Resolve(gfx, vbuf.GetLayout(), pvsbc));
 
@@ -597,6 +602,12 @@ std::unique_ptr<Mesh> Model::ParseMesh(Graphics& gfx, const aiMesh& mesh, const 
 	{
 		throw std::runtime_error("terrible combination of textures in material smh");
 	}
+
+	// anything with alpha diffuse is 2-sided IN SPONZA, need a better way
+	// of signalling 2-sidedness to be more general in the future
+	bindablePtrs.push_back(Rasterizer::Resolve(gfx, hasAlphaDiffuse));
+
+	bindablePtrs.push_back(Blender::Resolve(gfx, false));
 
 	return std::make_unique<Mesh>(gfx, std::move(bindablePtrs));
 }

@@ -10,3 +10,5 @@
 #include "VertexShader.h"
 #include "Sampler.h"
 #include "Texture.h"
+#include "Blender.h"
+#include "Rasterizer.h"

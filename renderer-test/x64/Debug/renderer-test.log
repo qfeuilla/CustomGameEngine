@@ -1,4 +1,5 @@
 ﻿  App.cpp
-  Mesh.cpp
+  CustomDirectXM.cpp
   main.cpp
+  Mesh.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe

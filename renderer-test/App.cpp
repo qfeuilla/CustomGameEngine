@@ -25,7 +25,7 @@ App::App()
 	gobber(wnd.Gfx(), "Models\\gobber\\GoblinX.obj", 6.0f)
 {
 	wall1.SetRootTransform(dx::XMMatrixTranslation(-12.0f, 0.0f, 0.0f));
-	wall1.SetRootTransform(dx::XMMatrixTranslation(12.0f, 0.0f, 0.0f));
+	wall2.SetRootTransform(dx::XMMatrixTranslation(12.0f, 0.0f, 0.0f));
 	gobber.SetRootTransform(dx::XMMatrixTranslation(0.0f, 0.0f, -4.0f));
 	nano.SetRootTransform(dx::XMMatrixTranslation(0.0f, -7.0f, 6.0f));
 	muro.SetRootTransform(dx::XMMatrixTranslation(0.0f, 7.0f, -6.0f));

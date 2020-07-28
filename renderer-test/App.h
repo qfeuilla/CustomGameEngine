@@ -33,7 +33,7 @@ private:
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	Model muro;
+	Model muro, nano, wall1, wall2, gobber;
 };
 
 #endif

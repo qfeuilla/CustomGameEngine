@@ -18,8 +18,14 @@ App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
 	light(wnd.Gfx()),
-	muro(wnd.Gfx(), "Models\\muro\\muro.obj")
+	muro(wnd.Gfx(), "Models\\muro\\muro.obj"),
+	nano(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj"),
+	wall1(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj"),
+	wall2(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj"),
+	gobber(wnd.Gfx(), "Models\\gobber\\GoblinX.obj")
 {
+	wall1.SetRootTransform(dx::XMMatrixTranslation(-1.5f, 0.0f, 0.0f));
+	wall2.SetRootTransform(dx::XMMatrixTranslation(-1.5f, 0.0f, 0.0f));
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
 }
 
@@ -112,6 +118,10 @@ void App::Update() {
 	wnd.Gfx().SetCamera(cam.GetMatrix());
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
 	muro.Draw(wnd.Gfx());
+	wall1.Draw(wnd.Gfx());
+	wall2.Draw(wnd.Gfx());
+	nano.Draw(wnd.Gfx());
+	gobber.Draw(wnd.Gfx());
 	light.Draw(wnd.Gfx());
 
 	// User Inputs
@@ -122,6 +132,10 @@ void App::Update() {
 	light.SpawnControlWindow();
 	FPSCounter();
 	muro.ShowWindow(wnd.Gfx(), "Muro");
+	wall1.ShowWindow(wnd.Gfx(), "Wall 1");
+	wall2.ShowWindow(wnd.Gfx(), "Wall 2");
+	gobber.ShowWindow(wnd.Gfx(), "Gobber");
+	nano.ShowWindow(wnd.Gfx(), "nanosuit");
 
 	// present
 	wnd.Gfx().EndFrame();

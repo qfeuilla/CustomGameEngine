@@ -1,9 +1,5 @@
-﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPSNormalMap.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPSNotex.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongPSSpecNormalMap.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongVS.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongVSNormalMap.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongVSNotex.cso
-  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\SolidVS.cso
+﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\renderer-test\PhongVSNotex.cso
+  App.cpp
+  Mesh.cpp
+  main.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe

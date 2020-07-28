@@ -10,6 +10,7 @@
 #include "ConstantBuffers.h"
 #include <type_traits>
 #include "imgui/imgui.h"
+#include <filesystem>
 
 class ModelException : public WndException
 {
@@ -129,13 +130,13 @@ private:
 class Model
 {
 public:
-	Model(Graphics& gfx, const std::string fileName);
+	Model(Graphics& gfx, const std::string& pathString);
 	void Draw(Graphics& gfx) const noxnd;
 	void ShowWindow(Graphics& gfx, const char* windowName = nullptr) noexcept;
 	void SetRootTransform(DirectX::FXMMATRIX tf) noexcept;
 	~Model() noexcept;
 private:
-	static std::unique_ptr<Mesh> ParseMesh(Graphics& gfx, const aiMesh& mesh, const aiMaterial* const* pMaterials);
+	static std::unique_ptr<Mesh> ParseMesh(Graphics& gfx, const aiMesh& mesh, const aiMaterial* const* pMaterials, const std::filesystem::path& path);
 	std::unique_ptr<Node> ParseNode(int& nextId, const aiNode& node) noexcept;
 private:
 	std::unique_ptr<Node> pRoot;

@@ -18,14 +18,17 @@ App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
 	light(wnd.Gfx()),
-	muro(wnd.Gfx(), "Models\\muro\\muro.obj"),
-	nano(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj"),
-	wall1(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj"),
-	wall2(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj"),
-	gobber(wnd.Gfx(), "Models\\gobber\\GoblinX.obj")
+	muro(wnd.Gfx(), "Models\\muro\\muro.obj", 10.0f),
+	nano(wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj", 2.0f),
+	wall1(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj", 6.0f),
+	wall2(wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj", 6.0f),
+	gobber(wnd.Gfx(), "Models\\gobber\\GoblinX.obj", 6.0f)
 {
-	wall1.SetRootTransform(dx::XMMatrixTranslation(-1.5f, 0.0f, 0.0f));
-	wall2.SetRootTransform(dx::XMMatrixTranslation(-1.5f, 0.0f, 0.0f));
+	wall1.SetRootTransform(dx::XMMatrixTranslation(-12.0f, 0.0f, 0.0f));
+	wall1.SetRootTransform(dx::XMMatrixTranslation(12.0f, 0.0f, 0.0f));
+	gobber.SetRootTransform(dx::XMMatrixTranslation(0.0f, 0.0f, -4.0f));
+	nano.SetRootTransform(dx::XMMatrixTranslation(0.0f, -7.0f, 6.0f));
+	muro.SetRootTransform(dx::XMMatrixTranslation(0.0f, 7.0f, -6.0f));
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 80.0f));
 }
 

@@ -33,8 +33,6 @@ private:
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	TestPlane bluePlane{ wnd.Gfx(),6.0f,{ 0.3f,0.3f,1.0f,0.0f } };
-	TestPlane redPlane{ wnd.Gfx(),6.0f,{ 1.0f,0.3f,0.3f,0.0f } };
 	Model test;
 };
 

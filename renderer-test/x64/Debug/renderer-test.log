@@ -1,3 +1,7 @@
 ﻿  App.cpp
+  Blender.cpp
   main.cpp
-  renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe
+App.obj : error LNK2019: unresolved external symbol "public: void __cdecl DirectX::ScratchImage::Release(void)" (?Release@ScratchImage@DirectX@@QEAAXXZ) referenced in function "public: __cdecl DirectX::ScratchImage::~ScratchImage(void)" (??1ScratchImage@DirectX@@QEAA@XZ)
+App.obj : error LNK2019: unresolved external symbol "public: struct DirectX::Image const * __cdecl DirectX::ScratchImage::GetImage(unsigned __int64,unsigned __int64,unsigned __int64)const " (?GetImage@ScratchImage@DirectX@@QEBAPEBUImage@2@_K00@Z) referenced in function "public: __cdecl App::App(void)" (??0App@@QEAA@XZ)
+App.obj : error LNK2019: unresolved external symbol "long __cdecl DirectX::LoadFromWICFile(wchar_t const *,unsigned long,struct DirectX::TexMetadata *,class DirectX::ScratchImage &,class std::function<void __cdecl(struct IWICMetadataQueryReader *)>)" (?LoadFromWICFile@DirectX@@YAJPEB_WKPEAUTexMetadata@1@AEAVScratchImage@1@V?$function@$$A6AXPEAUIWICMetadataQueryReader@@@Z@std@@@Z) referenced in function "public: __cdecl App::App(void)" (??0App@@QEAA@XZ)
+C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Debug\renderer-test.exe : fatal error LNK1120: 3 unresolved externals

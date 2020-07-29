@@ -6,11 +6,10 @@
 #include "CustomMath.h"
 #include <memory>
 #include "Surface.h"
-#include "GDIPlusManager.h"
 #include "imgui/imgui.h"
 #include "VertexBuffer.h"
-
-GDIPlusManager gdip_man;
+#include <dxtex/DirectXTex.h>
+#include "Testing.h"
 
 namespace dx = DirectX;
 
@@ -20,8 +19,7 @@ App::App()
 	light(wnd.Gfx()),
 	test(wnd.Gfx(), "Models\\Sponza\\sponza.obj", 0.04f)
 {
-	bluePlane.SetPos(cam.GetPos());
-	redPlane.SetPos(cam.GetPos());
+	TestDynamicConstant();
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 4000.0f));
 }
 
@@ -115,8 +113,6 @@ void App::Update() {
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
 	test.Draw(wnd.Gfx());
 	light.Draw(wnd.Gfx());
-	bluePlane.Draw(wnd.Gfx());
-	redPlane.Draw(wnd.Gfx());
 
 	// User Inputs
 	Controls(dt);
@@ -126,8 +122,6 @@ void App::Update() {
 	light.SpawnControlWindow();
 	FPSCounter();
 	test.ShowWindow(wnd.Gfx(), "Test obj");
-	bluePlane.SpawnControlWindow(wnd.Gfx(), "Blue Plane");
-	redPlane.SpawnControlWindow(wnd.Gfx(), "Red Plane");
 
 	// present
 	wnd.Gfx().EndFrame();

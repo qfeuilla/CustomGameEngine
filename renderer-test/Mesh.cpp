@@ -727,6 +727,8 @@ std::unique_ptr<Mesh> Model::ParseMesh(Graphics& gfx, const aiMesh& mesh, const 
 
 	bindablePtrs.push_back(Blender::Resolve(gfx, false));
 
+	bindablePtrs.push_back(std::make_shared<Stencil>(gfx, Stencil::Mode::Off));
+
 	return std::make_unique<Mesh>(gfx, std::move(bindablePtrs));
 }
 

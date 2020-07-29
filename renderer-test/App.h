@@ -10,6 +10,7 @@
 #include <set>
 #include "Mesh.h"
 #include "TestPlane.h"
+#include "TestCube.h"
 
 class App
 {
@@ -34,6 +35,8 @@ private:
 	PointLight light;
 	Camera cam;
 	Model test;
+	TestCube cube{ wnd.Gfx(),4.0f };
+	TestCube cube2{ wnd.Gfx(),4.0f };
 };
 
 #endif

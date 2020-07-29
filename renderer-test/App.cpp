@@ -111,8 +111,13 @@ void App::Update() {
 	wnd.Gfx().BeginFrame(0.07f, 0.0f, 0.12f);
 	wnd.Gfx().SetCamera(cam.GetMatrix());
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
-	test.Draw(wnd.Gfx());
+
 	light.Draw(wnd.Gfx());
+	test.Draw(wnd.Gfx());
+	cube.Draw(wnd.Gfx());
+	cube2.Draw(wnd.Gfx());
+	cube.DrawOutline(wnd.Gfx());
+	cube2.DrawOutline(wnd.Gfx());
 
 	// User Inputs
 	Controls(dt);
@@ -121,6 +126,8 @@ void App::Update() {
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	FPSCounter();
+	cube.SpawnControlWindow(wnd.Gfx(), "Cube 1");
+	cube2.SpawnControlWindow(wnd.Gfx(), "Cube 2");
 	test.ShowWindow(wnd.Gfx(), "Test obj");
 
 	// present

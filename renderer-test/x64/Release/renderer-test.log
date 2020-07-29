@@ -1,33 +1,3 @@
 ﻿  App.cpp
-  Bindable.cpp
-  Blender.cpp
-  Camera.cpp
-  Drawable.cpp
-  dxerr.cpp
-  DynamicConstant.cpp
-  Graphics.cpp
-  imgui_impl_dx11.cpp
-  imgui_impl_win32.cpp
-  IndexBuffer.cpp
-  InputLayout.cpp
-  LayoutCodex.cpp
   main.cpp
-  Mesh.cpp
-  Mouse.cpp
-  PixelShader.cpp
-  PointLight.cpp
-  Rasterizer.cpp
-  Sampler.cpp
-  SolidSphere.cpp
-  Surface.cpp
-  Testing.cpp
-  TestPlane.cpp
-  Texture.cpp
-  Topology.cpp
-  TransformCbuf.cpp
-  TransformCbufDouble.cpp
-  VertexBuffer.cpp
-  VertexShader.cpp
-  Window.cpp
-  WindowsMessageMap.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

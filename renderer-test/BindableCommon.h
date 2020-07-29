@@ -12,3 +12,4 @@
 #include "Texture.h"
 #include "Blender.h"
 #include "Rasterizer.h"
+#include "Stencil.h"

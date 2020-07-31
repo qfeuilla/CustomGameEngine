@@ -20,8 +20,25 @@ App::App()
 	light(wnd.Gfx())
 	//test(wnd.Gfx(), "Models\\testScenes\\shark\\Low Poly Shark Cage Diving Scene.obj", 1.0f)
 {
-	// TestDynamicConstant();
+	TestMaterialSystemLoading(wnd.Gfx());
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 4000.0f));
+	cube.SetPos({ 4.0f,0.0f,0.0f });
+	cube2.SetPos({ 0.0f,4.0f,0.0f });
+	{
+		std::string path = "Models\\brick_wall\\brick_wall.obj";
+		Assimp::Importer imp;
+		const auto pScene = imp.ReadFile(path,
+			aiProcess_Triangulate |
+			aiProcess_JoinIdenticalVertices |
+			aiProcess_ConvertToLeftHanded |
+			aiProcess_GenNormals |
+			aiProcess_CalcTangentSpace
+		);
+		Material mat{ wnd.Gfx(),*pScene->mMaterials[1],path };
+		pLoaded = std::make_unique<Mesh>(wnd.Gfx(), mat, *pScene->mMeshes[0]);
+	}
+
+
 }
 
 int App::Start() {
@@ -119,13 +136,71 @@ void App::Update() {
 	//cube2.Draw(wnd.Gfx());
 	//cube.DrawOutline(wnd.Gfx());
 	//cube2.DrawOutline(wnd.Gfx());
-	cube.Submit(fc);
-	cube2.Submit(fc);
+	//cube.Submit(fc);
+	//cube2.Submit(fc);
+	pLoaded->Submit(fc, DirectX::XMMatrixIdentity());
 
 	fc.Execute(wnd.Gfx());
 
 	// User Inputs
 	Controls(dt);
+
+	// Mesh techniques window
+	class Probe : public TechniqueProbe
+	{
+	public:
+		void OnSetTechnique() override
+		{
+			using namespace std::string_literals;
+			ImGui::TextColored({ 0.4f,1.0f,0.6f,1.0f }, pTech->GetName().c_str());
+			bool active = pTech->IsActive();
+			ImGui::Checkbox(("Tech Active##"s + std::to_string(techIdx)).c_str(), &active);
+			pTech->SetActiveState(active);
+		}
+		bool OnVisitBuffer(dynamical::Buffer& buf) override
+		{
+			namespace dx = DirectX;
+			float dirty = false;
+			const auto dcheck = [&dirty](bool changed) {dirty = dirty || changed; };
+			auto tag = [tagScratch = std::string{}, tagString = "##" + std::to_string(bufIdx)]
+			(const char* label) mutable
+			{
+				tagScratch = label + tagString;
+				return tagScratch.c_str();
+			};
+
+			if (auto v = buf["scale"]; v.Exists())
+			{
+				dcheck(ImGui::SliderFloat(tag("Scale"), &v, 1.0f, 2.0f, "%.3f", 3.5f));
+			}
+			if (auto v = buf["materialColor"]; v.Exists())
+			{
+				dcheck(ImGui::ColorPicker3(tag("Color"), reinterpret_cast<float*>(&static_cast<dx::XMFLOAT3&>(v))));
+			}
+			if (auto v = buf["specularColor"]; v.Exists())
+			{
+				dcheck(ImGui::ColorPicker3(tag("Spec. Color"), reinterpret_cast<float*>(&static_cast<dx::XMFLOAT3&>(v))));
+			}
+			if (auto v = buf["specularGloss"]; v.Exists())
+			{
+				dcheck(ImGui::SliderFloat(tag("Glossiness"), &v, 1.0f, 100.0f, "%.1f", 1.5f));
+			}
+			if (auto v = buf["specularWeight"]; v.Exists())
+			{
+				dcheck(ImGui::SliderFloat(tag("Spec. Weight"), &v, 0.0f, 2.0f));
+			}
+			if (auto v = buf["useNormalMap"]; v.Exists())
+			{
+				dcheck(ImGui::Checkbox(tag("Normal Map Enable"), &v));
+			}
+			if (auto v = buf["normalMapWeight"]; v.Exists())
+			{
+				dcheck(ImGui::SliderFloat(tag("Normal Map Weight"), &v, 0.0f, 2.0f));
+			}
+			return dirty;
+		}
+	} probe;
+	pLoaded->Accept(probe);
 
 	// imgui windows
 	cam.SpawnControlWindow();

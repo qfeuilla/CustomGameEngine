@@ -12,7 +12,9 @@
 #include <filesystem>
 #include "imgui/imgui.h"
 #include "DynamicConstant.h"
+#include <string>
 
+class Material;
 
 class ModelException : public WndException
 {
@@ -28,7 +30,7 @@ private:
 class Mesh : public Drawable
 {
 public:
-	using Drawable::Drawable;
+	Mesh(Graphics& gfx, const Material& mat, const aiMesh& mesh) noxnd;
 	DirectX::XMMATRIX GetTransformXM() const noexcept override;
 	void Submit(FrameCommander& frame, DirectX::FXMMATRIX accumulatedTranform) const noxnd;
 private:
@@ -45,8 +47,8 @@ public:
 	const DirectX::XMFLOAT4X4& GetAppliedTransform() const noexcept;
 	int GetId() const noexcept;
 	void ShowTree(Node*& pSelectedNode) const noexcept;
-	//const dynamical::Buffer* GetMaterialConstants() const noxnd;
-	//void SetMaterialConstants( const dynamical::Buffer& ) noxnd;
+	//const Dcb::Buffer* GetMaterialConstants() const noxnd;
+	//void SetMaterialConstants( const Dcb::Buffer& ) noxnd;
 private:
 	void AddChild(std::unique_ptr<Node> pChild) noxnd;
 private:

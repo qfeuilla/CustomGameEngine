@@ -12,6 +12,7 @@
 #include "TestPlane.h"
 #include "TestCube.h"
 #include "FrameCommander.h"
+#include "Material.h"
 
 class App
 {
@@ -39,6 +40,7 @@ private:
 	// Model test;
 	TestCube cube{ wnd.Gfx(),4.0f };
 	TestCube cube2{ wnd.Gfx(),4.0f };
+	std::unique_ptr<Mesh> pLoaded;
 };
 
 #endif

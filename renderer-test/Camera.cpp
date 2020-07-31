@@ -46,9 +46,9 @@ void Camera::SpawnControlWindow() noexcept
 
 void Camera::Reset() noexcept
 {
-	pos = { -10.0f,0.0f,-20.0f };
+	pos = { 0.0f,0.0f,-3.0f };
 	pitch = 0.0f;
-	yaw = 0.45f;
+	yaw = 0.0f;
 }
 
 DirectX::XMFLOAT3 Camera::GetPos() const noexcept

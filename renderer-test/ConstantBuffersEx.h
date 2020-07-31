@@ -2,6 +2,7 @@
 #include "Bindable.h"
 #include "GraphicsThrowMacros.h"
 #include "DynamicConstant.h"
+#include "TechniqueProbe.h"
 
 namespace Bind
 {
@@ -93,6 +94,15 @@ namespace Bind
 			}
 			PixelConstantBufferEX::Bind(gfx);
 		}
+
+		void Accept(TechniqueProbe& probe) override
+		{
+			if (probe.VisitBuffer(buf))
+			{
+				dirty = true;
+			}
+		}
+
 	private:
 		bool dirty = false;
 		dynamical::Buffer buf;

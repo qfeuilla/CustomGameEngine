@@ -55,6 +55,12 @@
     <Filter Include="Shader\Common">
       <UniqueIdentifier>{966ebfaf-6166-4a92-9518-c10947b60b69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\RenderQueue">
+      <UniqueIdentifier>{9af1937b-3dc0-4d75-9609-357f9c042aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\RenderQueue">
+      <UniqueIdentifier>{87826593-17fc-4d64-bd52-21fe9ad5a04c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -185,6 +191,24 @@
     </ClCompile>
     <ClCompile Include="TestCube.cpp">
       <Filter>Fichiers sources\3dObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameCommander.cpp">
+      <Filter>Fichiers sources\RenderQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="Job.cpp">
+      <Filter>Fichiers sources\RenderQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="Step.cpp">
+      <Filter>Fichiers sources\RenderQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique.cpp">
+      <Filter>Fichiers sources\RenderQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="Pass.cpp">
+      <Filter>Fichiers sources\RenderQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="NullPixelShader.cpp">
+      <Filter>Fichiers sources\Bindable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +394,30 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Fichiers d%27en-tête\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameCommander.h">
+      <Filter>Fichiers d%27en-tête\RenderQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="Job.h">
+      <Filter>Fichiers d%27en-tête\RenderQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="Step.h">
+      <Filter>Fichiers d%27en-tête\RenderQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique.h">
+      <Filter>Fichiers d%27en-tête\RenderQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="Pass.h">
+      <Filter>Fichiers d%27en-tête\RenderQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="NullPixelShader.h">
+      <Filter>Fichiers d%27en-tête\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="PerfLog.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="TechniqueProbe.h">
+      <Filter>Fichiers d%27en-tête\RenderQueue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

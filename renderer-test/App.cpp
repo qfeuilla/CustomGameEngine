@@ -10,16 +10,17 @@
 #include "VertexBuffer.h"
 #include <dxtex/DirectXTex.h>
 #include "Testing.h"
+#include "PerfLog.h"
 
 namespace dx = DirectX;
 
 App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
-	light(wnd.Gfx()),
-	test(wnd.Gfx(), "Models\\Sponza\\sponza.obj", 0.04f)
+	light(wnd.Gfx())
+	//test(wnd.Gfx(), "Models\\testScenes\\shark\\Low Poly Shark Cage Diving Scene.obj", 1.0f)
 {
-	TestDynamicConstant();
+	// TestDynamicConstant();
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 4000.0f));
 }
 
@@ -112,12 +113,16 @@ void App::Update() {
 	wnd.Gfx().SetCamera(cam.GetMatrix());
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
 
-	light.Draw(wnd.Gfx());
-	test.Draw(wnd.Gfx());
-	cube.Draw(wnd.Gfx());
-	cube2.Draw(wnd.Gfx());
-	cube.DrawOutline(wnd.Gfx());
-	cube2.DrawOutline(wnd.Gfx());
+	light.Submit(fc);
+	//test.Draw(wnd.Gfx());
+	//cube.Draw(wnd.Gfx());
+	//cube2.Draw(wnd.Gfx());
+	//cube.DrawOutline(wnd.Gfx());
+	//cube2.DrawOutline(wnd.Gfx());
+	cube.Submit(fc);
+	cube2.Submit(fc);
+
+	fc.Execute(wnd.Gfx());
 
 	// User Inputs
 	Controls(dt);
@@ -128,10 +133,11 @@ void App::Update() {
 	FPSCounter();
 	cube.SpawnControlWindow(wnd.Gfx(), "Cube 1");
 	cube2.SpawnControlWindow(wnd.Gfx(), "Cube 2");
-	test.ShowWindow(wnd.Gfx(), "Test obj");
+	//test.ShowWindow(wnd.Gfx(), "Test obj");
 
 	// present
 	wnd.Gfx().EndFrame();
+	fc.Reset();
 }
 
 void App::ShowImguiDemoWindow()

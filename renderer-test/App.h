@@ -11,6 +11,7 @@
 #include "Mesh.h"
 #include "TestPlane.h"
 #include "TestCube.h"
+#include "FrameCommander.h"
 
 class App
 {
@@ -29,12 +30,13 @@ private:
 	void FPSKeybrdControl(float);
 	bool showDemoWindow = false;
 
+	FrameCommander fc;
 	Window wnd;
 	CustomTimer timer;
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	Model test;
+	// Model test;
 	TestCube cube{ wnd.Gfx(),4.0f };
 	TestCube cube2{ wnd.Gfx(),4.0f };
 };

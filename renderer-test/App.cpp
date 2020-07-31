@@ -11,17 +11,23 @@
 #include <dxtex/DirectXTex.h>
 #include "Testing.h"
 #include "PerfLog.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include "Mesh.h"
+#include "DynamicConstant.h"
 
 namespace dx = DirectX;
 
 App::App()
 	:
 	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
-	light(wnd.Gfx())
-	//test(wnd.Gfx(), "Models\\testScenes\\shark\\Low Poly Shark Cage Diving Scene.obj", 1.0f)
+	light(wnd.Gfx()),
+	gobber(wnd.Gfx(), "Models\\gobber\\GoblinX.obj", 6.0f)
 {
-	TestMaterialSystemLoading(wnd.Gfx());
+	//TestMaterialSystemLoading(wnd.Gfx());
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, HEIGHT / WIDTH, 0.5f, 4000.0f));
+	/*
 	cube.SetPos({ 4.0f,0.0f,0.0f });
 	cube2.SetPos({ 0.0f,4.0f,0.0f });
 	{
@@ -37,8 +43,7 @@ App::App()
 		Material mat{ wnd.Gfx(),*pScene->mMaterials[1],path };
 		pLoaded = std::make_unique<Mesh>(wnd.Gfx(), mat, *pScene->mMeshes[0]);
 	}
-
-
+	*/
 }
 
 int App::Start() {
@@ -131,6 +136,7 @@ void App::Update() {
 	light.Bind(wnd.Gfx(), cam.GetMatrix());
 
 	light.Submit(fc);
+	gobber.Submit(fc);
 	//test.Draw(wnd.Gfx());
 	//cube.Draw(wnd.Gfx());
 	//cube2.Draw(wnd.Gfx());
@@ -138,7 +144,7 @@ void App::Update() {
 	//cube2.DrawOutline(wnd.Gfx());
 	//cube.Submit(fc);
 	//cube2.Submit(fc);
-	pLoaded->Submit(fc, DirectX::XMMatrixIdentity());
+	//pLoaded->Submit(fc, DirectX::XMMatrixIdentity());
 
 	fc.Execute(wnd.Gfx());
 
@@ -200,15 +206,15 @@ void App::Update() {
 			return dirty;
 		}
 	} probe;
-	pLoaded->Accept(probe);
+	//pLoaded->Accept(probe);
 
 	// imgui windows
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	FPSCounter();
-	cube.SpawnControlWindow(wnd.Gfx(), "Cube 1");
-	cube2.SpawnControlWindow(wnd.Gfx(), "Cube 2");
-	//test.ShowWindow(wnd.Gfx(), "Test obj");
+	//cube.SpawnControlWindow(wnd.Gfx(), "Cube 1");
+	//cube2.SpawnControlWindow(wnd.Gfx(), "Cube 2");
+	//gobber.ShowWindow(wnd.Gfx(), "Test obj");
 
 	// present
 	wnd.Gfx().EndFrame();

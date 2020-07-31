@@ -8,7 +8,7 @@
 #include "Camera.h"
 #include "PointLight.h"
 #include <set>
-#include "Mesh.h"
+#include "Model.h"
 #include "TestPlane.h"
 #include "TestCube.h"
 #include "FrameCommander.h"
@@ -37,10 +37,10 @@ private:
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	// Model test;
-	TestCube cube{ wnd.Gfx(),4.0f };
-	TestCube cube2{ wnd.Gfx(),4.0f };
-	std::unique_ptr<Mesh> pLoaded;
+	Model gobber;
+	//TestCube cube{ wnd.Gfx(),4.0f };
+	//TestCube cube2{ wnd.Gfx(),4.0f };
+	//std::unique_ptr<Mesh> pLoaded;
 };
 
 #endif

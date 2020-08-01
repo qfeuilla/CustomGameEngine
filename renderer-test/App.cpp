@@ -24,7 +24,7 @@ namespace dx = DirectX;
 
 App::App()
 	:
-	wnd((int)WIDTH, (int)HEIGHT, "The Donkey Fart Box"),
+	wnd((int)WIDTH, (int)HEIGHT, "Custom Game Engine"),
 	light(wnd.Gfx()),
 	sponza(wnd.Gfx(), "Models\\sponza\\sponza.obj", 1.0f / 20.0f)
 {

@@ -1,7 +1,7 @@
 #pragma once
-#include "ChiliException.h"
+#include "WndException.h"
 
-class ModelException : public ChiliException
+class ModelException : public WndException
 {
 public:
 	ModelException( int line,const char* file,std::string note ) noexcept;

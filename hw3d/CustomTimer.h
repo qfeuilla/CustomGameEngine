@@ -1,10 +1,10 @@
 #pragma once
 #include <chrono>
 
-class ChiliTimer
+class CustomTimer
 {
 public:
-	ChiliTimer() noexcept;
+	CustomTimer() noexcept;
 	float Mark() noexcept;
 	float Peek() const noexcept;
 private:

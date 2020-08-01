@@ -8,7 +8,7 @@
 #include "Material.h"
 #include "Mesh.h"
 #include "Testing.h"
-#include "ChiliXM.h"
+#include "CustomDirectXM.h"
 
 namespace dx = DirectX;
 

@@ -17,17 +17,17 @@
 *	You should have received a copy of the GNU General Public License					  *
 *	along with The Chili Direct3D Engine.  If not, see <http://www.gnu.org/licenses/>.    *
 ******************************************************************************************/
-#include "ChiliException.h"
+#include "WndException.h"
 #include <sstream>
 
 
-ChiliException::ChiliException( int line,const char* file ) noexcept
+WndException::WndException( int line,const char* file ) noexcept
 	:
 	line( line ),
 	file( file )
 {}
 
-const char* ChiliException::what() const noexcept
+const char* WndException::what() const noexcept
 {
 	std::ostringstream oss;
 	oss << GetType() << std::endl
@@ -36,22 +36,22 @@ const char* ChiliException::what() const noexcept
 	return whatBuffer.c_str();
 }
 
-const char* ChiliException::GetType() const noexcept
+const char* WndException::GetType() const noexcept
 {
 	return "Chili Exception";
 }
 
-int ChiliException::GetLine() const noexcept
+int WndException::GetLine() const noexcept
 {
 	return line;
 }
 
-const std::string& ChiliException::GetFile() const noexcept
+const std::string& WndException::GetFile() const noexcept
 {
 	return file;
 }
 
-std::string ChiliException::GetOriginString() const noexcept
+std::string WndException::GetOriginString() const noexcept
 {
 	std::ostringstream oss;
 	oss << "[File] " << file << std::endl

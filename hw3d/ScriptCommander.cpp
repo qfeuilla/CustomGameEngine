@@ -67,7 +67,7 @@ ScriptCommander::ScriptCommander( const std::vector<std::string>& args )
 
 ScriptCommander::Completion::Completion( const std::string& content ) noexcept
 	:
-	ChiliException( 69,"@ScriptCommanderAbort" ),
+	WndException( 69,"@ScriptCommanderAbort" ),
 	content( content )
 {}
 
@@ -87,7 +87,7 @@ const char* ScriptCommander::Completion::GetType() const noexcept
 
 ScriptCommander::Exception::Exception( int line,const char* file,const std::string& script,const std::string& message ) noexcept
 	:
-	ChiliException( 69,"@ScriptCommanderAbort" ),
+	WndException( 69,"@ScriptCommanderAbort" ),
 	script( script ),
 	message( message )
 {}

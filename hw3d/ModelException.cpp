@@ -3,14 +3,14 @@
 
 ModelException::ModelException( int line,const char* file,std::string note ) noexcept
 	:
-	ChiliException( line,file ),
+	WndException( line,file ),
 	note( std::move( note ) )
 {}
 
 const char* ModelException::what() const noexcept
 {
 	std::ostringstream oss;
-	oss << ChiliException::what() << std::endl
+	oss << WndException::what() << std::endl
 		<< "[Note] " << GetNote();
 	whatBuffer = oss.str();
 	return whatBuffer.c_str();

@@ -1,6 +1,6 @@
 #pragma once
-#include "ChiliWin.h"
-#include "ChiliException.h"
+#include "CustomWindows.h"
+#include "WndException.h"
 #include <d3d11.h>
 #include <wrl.h>
 #include <vector>
@@ -22,9 +22,9 @@ class Graphics
 {
 	friend class GraphicsResource;
 public:
-	class Exception : public ChiliException
+	class Exception : public WndException
 	{
-		using ChiliException::ChiliException;
+		using WndException::WndException;
 	};
 	class HrException : public Exception
 	{

@@ -1,11 +1,11 @@
 #include "App.h"
 #include <memory>
 #include <algorithm>
-#include "ChiliMath.h"
+#include "CustomMath.h"
 #include "Surface.h"
 #include "imgui/imgui.h"
 #include "VertexBuffer.h"
-#include "ChiliUtil.h"
+#include "StringUtils.h"
 #include "Testing.h"
 #include "PerfLog.h"
 #include <assimp/Importer.hpp>
@@ -15,14 +15,14 @@
 #include "DynamicConstant.h"
 #include "ModelProbe.h"
 #include "Node.h"
-#include "ChiliXM.h"
+#include "CustomDirectXM.h"
 
 namespace dx = DirectX;
 
 App::App( const std::string& commandLine )
 	:
 	commandLine( commandLine ),
-	wnd( 1280,720,"Custom Game engine" ),
+	wnd( WIDTH,HEIGHT,"Custom Game engine" ),
 	scriptCommander( TokenizeQuoted( commandLine ) ),
 	light( wnd.Gfx() )
 {
@@ -85,41 +85,9 @@ void App::DoFrame()
 		}
 	}
 
-	if( !wnd.CursorEnabled() )
-	{
-		if( wnd.kbd.KeyIsPressed( 'W' ) )
-		{
-			cam.Translate( { 0.0f,0.0f,dt } );
-		}
-		if( wnd.kbd.KeyIsPressed( 'A' ) )
-		{
-			cam.Translate( { -dt,0.0f,0.0f } );
-		}
-		if( wnd.kbd.KeyIsPressed( 'S' ) )
-		{
-			cam.Translate( { 0.0f,0.0f,-dt } );
-		}
-		if( wnd.kbd.KeyIsPressed( 'D' ) )
-		{
-			cam.Translate( { dt,0.0f,0.0f } );
-		}
-		if( wnd.kbd.KeyIsPressed( 'R' ) )
-		{
-			cam.Translate( { 0.0f,dt,0.0f } );
-		}
-		if( wnd.kbd.KeyIsPressed( 'F' ) )
-		{
-			cam.Translate( { 0.0f,-dt,0.0f } );
-		}
-	}
+	FPSCamTranslation(dt);
 
-	while( const auto delta = wnd.mouse.ReadRawDelta() )
-	{
-		if( !wnd.CursorEnabled() )
-		{
-			cam.Rotate( (float)delta->x,(float)delta->y );
-		}
-	}
+	FPSCamRotation();
 		
 	// Mesh techniques window
 	class TP : public TechniqueProbe
@@ -338,6 +306,47 @@ void App::ShowImguiDemoWindow()
 	if( showDemoWindow )
 	{
 		ImGui::ShowDemoWindow( &showDemoWindow );
+	}
+}
+
+void App::FPSCamRotation()
+{
+	while (const auto delta = wnd.mouse.ReadRawDelta()) {
+		if (!wnd.CursorEnabled())
+		{
+			cam.Rotate((float)delta->x, (float)delta->y);
+		}
+	}
+}
+
+void App::FPSCamTranslation(float dt)
+{
+	if (!wnd.CursorEnabled())
+	{
+		if (wnd.kbd.KeyIsPressed('Z'))
+		{
+			cam.Translate({ 0.0f,0.0f,dt });
+		}
+		if (wnd.kbd.KeyIsPressed('Q'))
+		{
+			cam.Translate({ -dt,0.0f,0.0f });
+		}
+		if (wnd.kbd.KeyIsPressed('S'))
+		{
+			cam.Translate({ 0.0f,0.0f,-dt });
+		}
+		if (wnd.kbd.KeyIsPressed('D'))
+		{
+			cam.Translate({ dt,0.0f,0.0f });
+		}
+		if (wnd.kbd.KeyIsPressed('E'))
+		{
+			cam.Translate({ 0.0f,dt,0.0f });
+		}
+		if (wnd.kbd.KeyIsPressed('A'))
+		{
+			cam.Translate({ 0.0f,-dt,0.0f });
+		}
 	}
 }
 

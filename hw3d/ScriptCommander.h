@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "ChiliException.h"
+#include "WndException.h"
 
 class ScriptCommander
 {
 public:
-	class Completion : public ChiliException
+	class Completion : public WndException
 	{
 	public:
 		Completion( const std::string& content ) noexcept;
@@ -15,7 +15,7 @@ public:
 	private:
 		std::string content;
 	};
-	class Exception : public ChiliException
+	class Exception : public WndException
 	{
 	public:
 		Exception( int line,const char* file,const std::string& script = "",const std::string& message = "" ) noexcept;

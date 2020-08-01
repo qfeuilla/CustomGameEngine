@@ -19,8 +19,8 @@
 *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
 ******************************************************************************************/
 #pragma once
-#include "ChiliWin.h"
-#include "ChiliException.h"
+#include "CustomWindows.h"
+#include "WndException.h"
 #include <string>
 #include <optional>
 #include "ConditionalNoexcept.h"
@@ -104,7 +104,7 @@ public:
 		}
 	};
 public:
-	class Exception : public ChiliException
+	class Exception : public WndException
 	{
 	public:
 		Exception( int line,const char* file,std::string note,std::optional<HRESULT> hr = {} ) noexcept;

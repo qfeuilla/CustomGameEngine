@@ -1,7 +1,7 @@
 #include "NullPixelShader.h"
 #include "GraphicsThrowMacros.h"
 #include "BindableCodex.h"
-#include "ChiliUtil.h"
+#include "StringUtils.h"
 
 namespace Bind
 {

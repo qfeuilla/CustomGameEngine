@@ -1,6 +1,6 @@
 #pragma once
 #include "Window.h"
-#include "ChiliTimer.h"
+#include "CustomTimer.h"
 #include "ImguiManager.h"
 #include "Camera.h"
 #include "PointLight.h"
@@ -23,13 +23,15 @@ public:
 private:
 	void DoFrame();
 	void ShowImguiDemoWindow();
+	void FPSCamRotation();
+	void FPSCamTranslation(float dt);
 private:
 	std::string commandLine;
 	bool showDemoWindow = false;
 	ImguiManager imgui;
 	Window wnd;
 	ScriptCommander scriptCommander;
-	ChiliTimer timer;
+	CustomTimer timer;
 	float speed_factor = 1.0f;
 	Camera cam;
 	FrameCommander fc{ wnd.Gfx() };

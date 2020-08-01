@@ -24,7 +24,7 @@
 #include <cassert>
 #include <sstream>
 #include <filesystem>
-#include "ChiliUtil.h"
+#include "StringUtils.h"
 
 
 Surface::Surface( unsigned int width,unsigned int height )
@@ -174,7 +174,7 @@ Surface::Surface( DirectX::ScratchImage scratch ) noexcept
 // surface exception stuff
 Surface::Exception::Exception( int line,const char* file,std::string note,std::optional<HRESULT> hr ) noexcept
 	:
-	ChiliException( line,file ),
+	WndException( line,file ),
 	note( "[Note] " + note )
 {
 	if( hr )
@@ -185,7 +185,7 @@ Surface::Exception::Exception( int line,const char* file,std::string note,std::o
 
 Surface::Exception::Exception( int line,const char* file,std::string filename,std::string note_in,std::optional<HRESULT> hr ) noexcept
 	:
-	ChiliException( line,file )
+	WndException( line,file )
 {
 	using namespace std::string_literals;
 	note = "[File] "s + filename + "\n"s + "[Note] "s + note_in;
@@ -199,7 +199,7 @@ Surface::Exception::Exception( int line,const char* file,std::string filename,st
 const char* Surface::Exception::what() const noexcept
 {
 	std::ostringstream oss;
-	oss << ChiliException::what() << std::endl << GetNote();
+	oss << WndException::what() << std::endl << GetNote();
 	whatBuffer = oss.str();
 	return whatBuffer.c_str();
 }

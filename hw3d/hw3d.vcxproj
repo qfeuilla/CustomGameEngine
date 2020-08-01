@@ -96,10 +96,10 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Blender.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="ChiliException.cpp" />
-    <ClCompile Include="ChiliTimer.cpp" />
-    <ClCompile Include="ChiliUtil.cpp" />
-    <ClCompile Include="ChiliXM.cpp" />
+    <ClCompile Include="WndException.cpp" />
+    <ClCompile Include="CustomTimer.cpp" />
+    <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="CustomDirectXM.cpp" />
     <ClCompile Include="DepthStencil.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="dxerr.cpp" />
@@ -235,12 +235,12 @@
     <ClInclude Include="BindableCommon.h" />
     <ClInclude Include="Blender.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="ChiliException.h" />
-    <ClInclude Include="ChiliMath.h" />
-    <ClInclude Include="ChiliTimer.h" />
-    <ClInclude Include="ChiliUtil.h" />
-    <ClInclude Include="ChiliWin.h" />
-    <ClInclude Include="ChiliXM.h" />
+    <ClInclude Include="WndException.h" />
+    <ClInclude Include="CustomMath.h" />
+    <ClInclude Include="CustomTimer.h" />
+    <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="CustomWindows.h" />
+    <ClInclude Include="CustomDirectXM.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ConditionalNoexcept.h" />
     <ClInclude Include="ConstantBuffers.h" />
@@ -315,7 +315,7 @@
     <ResourceCompile Include="hw3d.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="chili.ico" />
+    <Image Include="CustomGameEngine.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DXGetErrorDescription.inl" />

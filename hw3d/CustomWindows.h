@@ -66,3 +66,9 @@
 #define STRICT
 
 #include <Windows.h>
+
+#define HEIGHT 1080
+#define WIDTH 1920
+
+#define HEIGHTF 1080.0f
+#define WIDTHF 1920.0f

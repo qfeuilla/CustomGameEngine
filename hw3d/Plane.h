@@ -4,7 +4,7 @@
 #include "Vertex.h"
 #include "IndexedTriangleList.h"
 #include <DirectXMath.h>
-#include "ChiliMath.h"
+#include "CustomMath.h"
 #include <array>
 
 class Plane

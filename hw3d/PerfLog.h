@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include <iomanip>
-#include "ChiliTimer.h"
+#include "CustomTimer.h"
 
 class PerfLog
 {
@@ -71,6 +71,6 @@ public:
 		Get_().Mark_( label );
 	}
 private:
-	ChiliTimer timer;
+	CustomTimer timer;
 	std::vector<Entry> entries;
 };

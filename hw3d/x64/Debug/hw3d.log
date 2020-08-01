@@ -1,0 +1,76 @@
+﻿  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\Fullscreen_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\Funk_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\Offset_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifMskSpcNrm_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifSpcNrm_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifSpc_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\xPhongDifNro.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifSpc_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifMskSpcNrm_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifNrm_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\Phong_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifSpcNrm_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDifNrm_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\Phong_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\Solid_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\Solid_VS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDif_PS.cso
+  compilation object save succeeded; see C:\Users\quent\Desktop\CustomGameEngine\hw3d\PhongDif_VS.cso
+  App.cpp
+  Blender.cpp
+  Camera.cpp
+  ChiliException.cpp
+  ChiliTimer.cpp
+  ChiliUtil.cpp
+  ChiliXM.cpp
+  DepthStencil.cpp
+  Drawable.cpp
+  dxerr.cpp
+  DxgiInfoManager.cpp
+  DynamicConstant.cpp
+  Graphics.cpp
+  GraphicsResource.cpp
+  ImguiManager.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_widgets.cpp
+  IndexBuffer.cpp
+  InputLayout.cpp
+  Job.cpp
+  Keyboard.cpp
+  LayoutCodex.cpp
+  Material.cpp
+  Mesh.cpp
+  Model.cpp
+  ModelException.cpp
+  Node.cpp
+  NullPixelShader.cpp
+  PointLight.cpp
+  Mouse.cpp
+  PixelShader.cpp
+  Rasterizer.cpp
+  RenderTarget.cpp
+  Sampler.cpp
+  ScriptCommander.cpp
+  SolidSphere.cpp
+  Step.cpp
+  Surface.cpp
+  Technique.cpp
+  TestCube.cpp
+  Testing.cpp
+  TestPlane.cpp
+  Texture.cpp
+  TexturePreprocessor.cpp
+  Topology.cpp
+  TransformCbuf.cpp
+  TransformCbufDoubleboi.cpp
+  Vertex.cpp
+  VertexBuffer.cpp
+  VertexShader.cpp
+  Window.cpp
+  WindowsMessageMap.cpp
+  WinMain.cpp
+  hw3d.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\x64\Debug\hw3d.exe

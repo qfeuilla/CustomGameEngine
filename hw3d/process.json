@@ -1,0 +1,11 @@
+{
+	"enabled": false,
+	"commands": [
+    {
+      "command": "flip-y",
+      "params": {
+        "source": "Models\\brick_wall\\brick_wall_normal.jpg"
+      }
+    }
+	]
+}

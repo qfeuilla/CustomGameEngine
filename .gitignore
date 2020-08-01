@@ -9,3 +9,8 @@ renderer-test/x64/*
 *.tlog
 *.idb
 *.pdb
+.vs/*
+.vs/*/*
+.vs/*/*/*
+.vs/*/*/*/*
+

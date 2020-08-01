@@ -60,6 +60,7 @@ modelPath(path.string())
 				hasGlossAlpha = tex->HasAlpha();
 				step.AddBindable(std::move(tex));
 				pscLayout.Add<dynamical::Bool>("useGlossAlpha");
+				pscLayout.Add<dynamical::Bool>("useSpecularMap");
 			}
 			pscLayout.Add<dynamical::Float3>("specularColor");
 			pscLayout.Add<dynamical::Float>("specularWeight");
@@ -101,6 +102,7 @@ modelPath(path.string())
 				r = reinterpret_cast<DirectX::XMFLOAT3&>(color);
 			}
 			buf["useGlossAlpha"].SetIfExists(hasGlossAlpha);
+			buf["useSpecularMap"].SetIfExists(true);
 			if (auto r = buf["specularColor"]; r.Exists())
 			{
 				aiColor3D color = { 0.18f,0.18f,0.18f };
@@ -116,14 +118,14 @@ modelPath(path.string())
 			}
 			buf["useNormalMap"].SetIfExists(true);
 			buf["normalMapWeight"].SetIfExists(1.0f);
-			step.AddBindable(std::make_unique<Bind::CachingPixelConstantBufferEX>(gfx, std::move(buf), 1u));
+			step.AddBindable(std::make_unique<Bind::CachingPixelConstantBufferEx>(gfx, std::move(buf), 1u));
 		}
 		phong.AddStep(std::move(step));
 		techniques.push_back(std::move(phong));
 	}
 	// outline technique
 	{
-		Technique outline("Outline");
+		Technique outline("Outline", false);
 		{
 			Step mask(1);
 
@@ -144,61 +146,32 @@ modelPath(path.string())
 			Step draw(2);
 
 			// these can be pass-constant (tricky due to layout issues)
-			auto pvs = VertexShader::Resolve(gfx, "Solid_VS.cso");
+			auto pvs = VertexShader::Resolve(gfx, "Offset_VS.cso");
 			auto pvsbc = pvs->GetBytecode();
 			draw.AddBindable(std::move(pvs));
 
 			// this can be pass-constant
 			draw.AddBindable(PixelShader::Resolve(gfx, "Solid_PS.cso"));
 
-			dynamical::RawLayout lay;
-			lay.Add<dynamical::Float3>("materialColor");
-			auto buf = dynamical::Buffer(std::move(lay));
-			buf["materialColor"] = DirectX::XMFLOAT3{ 1.0f,0.4f,0.4f };
-			draw.AddBindable(std::make_shared<Bind::CachingPixelConstantBufferEX>(gfx, buf, 1u));
+			{
+				dynamical::RawLayout lay;
+				lay.Add<dynamical::Float3>("materialColor");
+				auto buf = dynamical::Buffer(std::move(lay));
+				buf["materialColor"] = DirectX::XMFLOAT3{ 1.0f,0.4f,0.4f };
+				draw.AddBindable(std::make_shared<Bind::CachingPixelConstantBufferEx>(gfx, buf, 1u));
+			}
+			{
+				dynamical::RawLayout lay;
+				lay.Add<dynamical::Float>("offset");
+				auto buf = dynamical::Buffer(std::move(lay));
+				buf["offset"] = 0.1f;
+				draw.AddBindable(std::make_shared<Bind::CachingVertexConstantBufferEx>(gfx, buf, 1u));
+			}
 
 			// TODO: better sub-layout generation tech for future consideration maybe
 			draw.AddBindable(InputLayout::Resolve(gfx, vtxLayout, pvsbc));
 
-			// quick and dirty... nicer solution maybe takes a lamba... we'll see :)
-			class TransformCbufScaling : public TransformCbuf
-			{
-			public:
-				TransformCbufScaling(Graphics& gfx, float scale = 1.04)
-					:
-					TransformCbuf(gfx),
-					buf(MakeLayout())
-				{
-					buf["scale"] = scale;
-				}
-				void Accept(TechniqueProbe& probe) override
-				{
-					probe.VisitBuffer(buf);
-				}
-				void Bind(Graphics& gfx) noexcept override
-				{
-					const float scale = buf["scale"];
-					const auto scaleMatrix = DirectX::XMMatrixScaling(scale, scale, scale);
-					auto xf = GetTransforms(gfx);
-					xf.modelView = xf.modelView * scaleMatrix;
-					xf.modelViewProj = xf.modelViewProj * scaleMatrix;
-					UpdateBindImpl(gfx, xf);
-				}
-				std::unique_ptr<CloningBindable> Clone() const noexcept override
-				{
-					return std::make_unique<TransformCbufScaling>(*this);
-				}
-			private:
-				static dynamical::RawLayout MakeLayout()
-				{
-					dynamical::RawLayout layout;
-					layout.Add<dynamical::Float>("scale");
-					return layout;
-				}
-			private:
-				dynamical::Buffer buf;
-			};
-			draw.AddBindable(std::make_shared<TransformCbufScaling>(gfx));
+			draw.AddBindable(std::make_shared<TransformCbuf>(gfx));
 
 			// TODO: might need to specify rasterizer when doubled-sided models start being used
 
@@ -225,9 +198,20 @@ std::vector<unsigned short> Material::ExtractIndices(const aiMesh& mesh) const n
 	}
 	return indices;
 }
-std::shared_ptr<Bind::VertexBuffer> Material::MakeVertexBindable(Graphics& gfx, const aiMesh& mesh) const noxnd
+std::shared_ptr<Bind::VertexBuffer> Material::MakeVertexBindable(Graphics& gfx, const aiMesh& mesh, float scale) const noxnd 
 {
-	return Bind::VertexBuffer::Resolve(gfx, MakeMeshTag(mesh), ExtractVertices(mesh));
+	auto vtc = ExtractVertices(mesh);
+	if (scale != 1.0f)
+	{
+		for (auto i = 0u; i < vtc.Size(); i++)
+		{
+			DirectX::XMFLOAT3& pos = vtc[i].Attr<dynamical::VertexLayout::ElementType::Position3D>();
+			pos.x *= scale;
+			pos.y *= scale;
+			pos.z *= scale;
+		}
+	}
+	return Bind::VertexBuffer::Resolve(gfx, MakeMeshTag(mesh), std::move(vtc));
 }
 std::shared_ptr<Bind::IndexBuffer> Material::MakeIndexBindable(Graphics& gfx, const aiMesh& mesh) const noxnd
 {

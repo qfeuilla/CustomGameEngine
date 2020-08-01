@@ -1,6 +1,7 @@
 #include "Node.h"
 #include "Mesh.h"
 #include "imgui/imgui.h"
+#include "ModelProbe.h"
 
 namespace dx = DirectX;
 
@@ -22,11 +23,11 @@ void Node::Submit(FrameCommander& frame, DirectX::FXMMATRIX accumulatedTransform
 		accumulatedTransform;
 	for (const auto pm : meshPtrs)
 	{
-		pm->Submit(frame, accumulatedTransform);
+		pm->Submit(frame, built);
 	}
 	for (const auto& pc : childPtrs)
 	{
-		pc->Submit(frame, accumulatedTransform);
+		pc->Submit(frame, built);
 	}
 }
 
@@ -49,4 +50,24 @@ const DirectX::XMFLOAT4X4& Node::GetAppliedTransform() const noexcept
 int Node::GetId() const noexcept
 {
 	return id;
+}
+
+void Node::Accept(ModelProbe& probe)
+{
+	if (probe.PushNode(*this))
+	{
+		for (auto& cp : childPtrs)
+		{
+			cp->Accept(probe);
+		}
+		probe.PopNode(*this);
+	}
+}
+
+void Node::Accept(TechniqueProbe& probe)
+{
+	for (auto& mp : meshPtrs)
+	{
+		mp->Accept(probe);
+	}
 }

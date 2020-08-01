@@ -1,2 +1,9 @@
 ﻿  App.cpp
+  Drawable.cpp
+  main.cpp
+  Material.cpp
+  Mesh.cpp
+  Model.cpp
+  TestCube.cpp
+  Testing.cpp
   renderer-test.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\renderer-test\x64\Release\renderer-test.exe

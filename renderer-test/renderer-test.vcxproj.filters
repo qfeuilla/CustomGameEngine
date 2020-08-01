@@ -228,9 +228,6 @@
     <ClCompile Include="ModelException.cpp">
       <Filter>Fichiers sources\3DModel</Filter>
     </ClCompile>
-    <ClCompile Include="ModelWindow.cpp">
-      <Filter>Fichiers sources\3DModel</Filter>
-    </ClCompile>
     <ClCompile Include="Node.cpp">
       <Filter>Fichiers sources\3DModel</Filter>
     </ClCompile>
@@ -452,10 +449,10 @@
     <ClInclude Include="ModelException.h">
       <Filter>Fichiers d%27en-tête\3DModel</Filter>
     </ClInclude>
-    <ClInclude Include="ModelWindow.h">
+    <ClInclude Include="Node.h">
       <Filter>Fichiers d%27en-tête\3DModel</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="ModelProbe.h">
       <Filter>Fichiers d%27en-tête\3DModel</Filter>
     </ClInclude>
   </ItemGroup>
@@ -513,6 +510,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Solid_VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Offset_VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

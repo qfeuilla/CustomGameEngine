@@ -14,6 +14,7 @@
 #include "FrameCommander.h"
 #include "Material.h"
 
+
 class App
 {
 public:
@@ -37,9 +38,9 @@ private:
 	float sim_speed = 1.0f;
 	PointLight light;
 	Camera cam;
-	Model gobber;
-	//TestCube cube{ wnd.Gfx(),4.0f };
-	//TestCube cube2{ wnd.Gfx(),4.0f };
+	Model sponza;
+	TestCube cube{ wnd.Gfx(),4.0f };
+	TestCube cube2{ wnd.Gfx(),4.0f };
 	//std::unique_ptr<Mesh> pLoaded;
 };
 

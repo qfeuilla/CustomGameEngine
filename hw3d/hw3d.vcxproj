@@ -94,8 +94,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="BindingPass.cpp" />
     <ClCompile Include="Blender.cpp" />
+    <ClCompile Include="BufferClearPass.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="FullscreenPass.cpp" />
+    <ClCompile Include="Pass.cpp" />
+    <ClCompile Include="PassInput.cpp" />
+    <ClCompile Include="PassOutput.cpp" />
+    <ClCompile Include="RenderGraph.cpp" />
+    <ClCompile Include="RenderGraphCompileException.cpp" />
+    <ClCompile Include="RenderQueuePass.cpp" />
+    <ClCompile Include="StepLinkingProbe.cpp" />
+    <ClCompile Include="TestRenderGraph.cpp" />
+    <ClCompile Include="TransformCbufScaling.cpp" />
     <ClCompile Include="WndException.cpp" />
     <ClCompile Include="CustomTimer.cpp" />
     <ClCompile Include="StringUtils.cpp" />
@@ -121,13 +133,17 @@
     <ClCompile Include="LayoutCodex.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <FxCompile Include="BlurOutline_PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="Fullscreen_VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Funk_PS.hlsl">
+    <FxCompile Include="Blur_PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -196,7 +212,6 @@
     <ClCompile Include="TexturePreprocessor.cpp" />
     <ClCompile Include="Topology.cpp" />
     <ClCompile Include="TransformCbuf.cpp" />
-    <ClCompile Include="TransformCbufDoubleboi.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexShader.cpp" />
@@ -233,8 +248,25 @@
     <ClInclude Include="Bindable.h" />
     <ClInclude Include="BindableCodex.h" />
     <ClInclude Include="BindableCommon.h" />
+    <ClInclude Include="BindingPass.h" />
     <ClInclude Include="Blender.h" />
+    <ClInclude Include="BlurPack.h" />
+    <ClInclude Include="BufferClearPass.h" />
+    <ClInclude Include="BufferResource.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="FullscreenPass.h" />
+    <ClInclude Include="LambertianPass.h" />
+    <ClInclude Include="OutlineDrawingPass.h" />
+    <ClInclude Include="OutlineMaskGenerationPass.h" />
+    <ClInclude Include="PassInput.h" />
+    <ClInclude Include="PassOutput.h" />
+    <ClInclude Include="RenderGraph.h" />
+    <ClInclude Include="RenderGraphCompileException.h" />
+    <ClInclude Include="RenderQueuePass.h" />
+    <ClInclude Include="StepLinkingProbe.h" />
+    <ClInclude Include="TestModelProbe.h" />
+    <ClInclude Include="TestRenderGraph.h" />
+    <ClInclude Include="TransformCbufScaling.h" />
     <ClInclude Include="WndException.h" />
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="CustomTimer.h" />
@@ -248,7 +280,6 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DepthStencil.h" />
     <ClInclude Include="DynamicConstant.h" />
-    <ClInclude Include="FrameCommander.h" />
     <ClInclude Include="GraphicsResource.h" />
     <ClInclude Include="Job.h" />
     <ClInclude Include="json.hpp" />
@@ -303,7 +334,6 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Topology.h" />
     <ClInclude Include="TransformCbuf.h" />
-    <ClInclude Include="TransformCbufDoubleboi.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexShader.h" />

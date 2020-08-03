@@ -1,0 +1,13 @@
+﻿  App.cpp
+  BindingPass.cpp
+  BufferClearPass.cpp
+  FullscreenPass.cpp
+  Pass.cpp
+  RenderGraph.cpp
+  RenderQueuePass.cpp
+  Step.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 6882 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  hw3d.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\x64\Release\hw3d.exe

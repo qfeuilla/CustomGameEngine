@@ -1,6 +1,4 @@
 ﻿  App.cpp
-  CustomDirectXM.cpp
-  Mesh.cpp
-  Model.cpp
-  Testing.cpp
+  TestRenderGraph.cpp
+  WinMain.cpp
   hw3d.vcxproj -> C:\Users\quent\Desktop\CustomGameEngine\x64\Debug\hw3d.exe

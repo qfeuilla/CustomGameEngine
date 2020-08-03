@@ -14,7 +14,7 @@ cbuffer Control
 
 float4 main(float2 uv : Texcoord) : SV_Target
 {
-    uint width, height;
+    float width, height;
     tex.GetDimensions(width, height);
     float dx, dy;
     if (horizontal)
@@ -28,6 +28,7 @@ float4 main(float2 uv : Texcoord) : SV_Target
         dy = 1.0f / height;
     }
     const int r = nTaps / 2;
+    
     float accAlpha = 0.0f;
     float3 maxColor = float3(0.0f, 0.0f, 0.0f);
     for (int i = -r; i <= r; i++)

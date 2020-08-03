@@ -2,22 +2,22 @@
 #include "Drawable.h"
 #include "TechniqueProbe.h"
 
-void Technique::Submit(const Drawable& drawable) const noexcept 
+void Technique::Submit(const Drawable& drawable) const noexcept
 {
-	if( active )
+	if (active)
 	{
-		for( const auto& step : steps )
+		for (const auto& step : steps)
 		{
-			step.Submit( drawable );
+			step.Submit(drawable);
 		}
 	}
 }
 
-void Technique::InitializeParentReferences( const Drawable & parent ) noexcept
+void Technique::InitializeParentReferences(const Drawable& parent) noexcept
 {
-	for( auto& s : steps )
+	for (auto& s : steps)
 	{
-		s.InitializeParentReferences( parent );
+		s.InitializeParentReferences(parent);
 	}
 }
 
@@ -56,7 +56,7 @@ const std::string& Technique::GetName() const noexcept
 	return name;
 }
 
-void Technique::Link(RenderGraph& rg)
+void Technique::Link(Rgph::RenderGraph& rg)
 {
 	for (auto& step : steps)
 	{

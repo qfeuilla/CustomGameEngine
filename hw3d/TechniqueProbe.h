@@ -19,21 +19,21 @@ public:
 		techIdx++;
 		OnSetTechnique();
 	}
-	void SetStep( Step* pStep_in )
+	void SetStep(Step* pStep_in)
 	{
 		pStep = pStep_in;
 		stepIdx++;
 		OnSetStep();
 	}
-	bool VisitBuffer( Dcb::Buffer& buf )
+	bool VisitBuffer(Dcb::Buffer& buf)
 	{
 		bufIdx++;
-		return OnVisitBuffer( buf );
+		return OnVisitBuffer(buf);
 	}
 protected:
 	virtual void OnSetTechnique() {}
 	virtual void OnSetStep() {}
-	virtual bool OnVisitBuffer( Dcb::Buffer& )
+	virtual bool OnVisitBuffer(Dcb::Buffer&)
 	{
 		return false;
 	}

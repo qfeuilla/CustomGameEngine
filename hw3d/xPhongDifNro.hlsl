@@ -5,10 +5,10 @@
 
 cbuffer ObjectCBuf
 {
-	float specularIntensity;
-	float specularPower;
-	bool normalMapEnabled;
-	float padding[1];
+    float specularIntensity;
+    float specularPower;
+    bool normalMapEnabled;
+    float padding[1];
 };
 
 #include "Transform.hlsl"
@@ -19,7 +19,7 @@ Texture2D nmap : register(t2);
 SamplerState splr;
 
 
-float4 main( float3 viewFragPos : Position,float3 viewNormal : Normal,float2 tc : Texcoord ) : SV_Target
+float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float2 tc : Texcoord) : SV_Target
 {
 	// sample normal from map if normal mapping enabled
     if (normalMapEnabled)
@@ -42,5 +42,5 @@ float4 main( float3 viewFragPos : Position,float3 viewNormal : Normal,float2 tc 
         viewFragPos, att, specularPower
     );
 	// final color
-	return float4( saturate( (diffuse + ambient) * tex.Sample( splr, tc ).rgb + specular ), 1.0f );
+    return float4(saturate((diffuse + ambient) * tex.Sample(splr, tc).rgb + specular), 1.0f);
 }

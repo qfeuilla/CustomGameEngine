@@ -9,29 +9,29 @@ namespace Bind
 	class ConstantBufferEx : public Bindable
 	{
 	public:
-		void Update( Graphics& gfx,const Dcb::Buffer& buf )
+		void Update(Graphics& gfx, const Dcb::Buffer& buf)
 		{
-			assert( &buf.GetRootLayoutElement() == &GetRootLayoutElement() );
-			INFOMAN( gfx );
+			assert(&buf.GetRootLayoutElement() == &GetRootLayoutElement());
+			INFOMAN(gfx);
 
 			D3D11_MAPPED_SUBRESOURCE msr;
-			GFX_THROW_INFO( GetContext( gfx )->Map(
-				pConstantBuffer.Get(),0u,
-				D3D11_MAP_WRITE_DISCARD,0u,
+			GFX_THROW_INFO(GetContext(gfx)->Map(
+				pConstantBuffer.Get(), 0u,
+				D3D11_MAP_WRITE_DISCARD, 0u,
 				&msr
-			) );
-			memcpy( msr.pData,buf.GetData(),buf.GetSizeInBytes() );
-			GetContext( gfx )->Unmap( pConstantBuffer.Get(),0u );
+			));
+			memcpy(msr.pData, buf.GetData(), buf.GetSizeInBytes());
+			GetContext(gfx)->Unmap(pConstantBuffer.Get(), 0u);
 		}
 		// this exists for validation of the update buffer layout
 		// reason why it's not getbuffer is becasue nocache doesn't store buffer
 		virtual const Dcb::LayoutElement& GetRootLayoutElement() const noexcept = 0;
 	protected:
-		ConstantBufferEx( Graphics& gfx,const Dcb::LayoutElement& layoutRoot,UINT slot,const Dcb::Buffer* pBuf )
+		ConstantBufferEx(Graphics& gfx, const Dcb::LayoutElement& layoutRoot, UINT slot, const Dcb::Buffer* pBuf)
 			:
-			slot( slot )
+			slot(slot)
 		{
-			INFOMAN( gfx );
+			INFOMAN(gfx);
 
 			D3D11_BUFFER_DESC cbd;
 			cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -41,15 +41,15 @@ namespace Bind
 			cbd.ByteWidth = (UINT)layoutRoot.GetSizeInBytes();
 			cbd.StructureByteStride = 0u;
 
-			if( pBuf != nullptr )
+			if (pBuf != nullptr)
 			{
 				D3D11_SUBRESOURCE_DATA csd = {};
 				csd.pSysMem = pBuf->GetData();
-				GFX_THROW_INFO( GetDevice( gfx )->CreateBuffer( &cbd,&csd,&pConstantBuffer ) );
+				GFX_THROW_INFO(GetDevice(gfx)->CreateBuffer(&cbd, &csd, &pConstantBuffer));
 			}
 			else
 			{
-				GFX_THROW_INFO( GetDevice( gfx )->CreateBuffer( &cbd,nullptr,&pConstantBuffer ) );
+				GFX_THROW_INFO(GetDevice(gfx)->CreateBuffer(&cbd, nullptr, &pConstantBuffer));
 			}
 		}
 	protected:
@@ -61,9 +61,10 @@ namespace Bind
 	{
 	public:
 		using ConstantBufferEx::ConstantBufferEx;
-		void Bind( Graphics& gfx ) noexcept override
+		void Bind(Graphics& gfx) noxnd override
 		{
-			GetContext( gfx )->PSSetConstantBuffers( slot,1u,pConstantBuffer.GetAddressOf() );
+			INFOMAN_NOHR(gfx);
+			GFX_THROW_INFO_ONLY(GetContext(gfx)->PSSetConstantBuffers(slot, 1u, pConstantBuffer.GetAddressOf()));
 		}
 	};
 
@@ -71,9 +72,10 @@ namespace Bind
 	{
 	public:
 		using ConstantBufferEx::ConstantBufferEx;
-		void Bind( Graphics& gfx ) noexcept override
+		void Bind(Graphics& gfx) noxnd override
 		{
-			GetContext( gfx )->VSSetConstantBuffers( slot,1u,pConstantBuffer.GetAddressOf() );
+			INFOMAN_NOHR(gfx);
+			GFX_THROW_INFO_ONLY(GetContext(gfx)->VSSetConstantBuffers(slot, 1u, pConstantBuffer.GetAddressOf()));
 		}
 	};
 
@@ -81,15 +83,15 @@ namespace Bind
 	class CachingConstantBufferEx : public T
 	{
 	public:
-		CachingConstantBufferEx( Graphics& gfx,const Dcb::CookedLayout& layout,UINT slot )
+		CachingConstantBufferEx(Graphics& gfx, const Dcb::CookedLayout& layout, UINT slot)
 			:
-			T( gfx,*layout.ShareRoot(),slot,nullptr ),
-			buf( Dcb::Buffer( layout ) )
+			T(gfx, *layout.ShareRoot(), slot, nullptr),
+			buf(Dcb::Buffer(layout))
 		{}
-		CachingConstantBufferEx( Graphics& gfx,const Dcb::Buffer& buf,UINT slot )
+		CachingConstantBufferEx(Graphics& gfx, const Dcb::Buffer& buf, UINT slot)
 			:
-			T( gfx,buf.GetRootLayoutElement(),slot,&buf ),
-			buf( buf )
+			T(gfx, buf.GetRootLayoutElement(), slot, &buf),
+			buf(buf)
 		{}
 		const Dcb::LayoutElement& GetRootLayoutElement() const noexcept override
 		{
@@ -99,23 +101,23 @@ namespace Bind
 		{
 			return buf;
 		}
-		void SetBuffer( const Dcb::Buffer& buf_in )
+		void SetBuffer(const Dcb::Buffer& buf_in)
 		{
-			buf.CopyFrom( buf_in );
+			buf.CopyFrom(buf_in);
 			dirty = true;
 		}
-		void Bind( Graphics& gfx ) noexcept override
+		void Bind(Graphics& gfx) noxnd override
 		{
-			if( dirty )
+			if (dirty)
 			{
-				T::Update( gfx,buf );
+				T::Update(gfx, buf);
 				dirty = false;
 			}
-			T::Bind( gfx );
+			T::Bind(gfx);
 		}
-		void Accept( TechniqueProbe& probe ) override
+		void Accept(TechniqueProbe& probe) override
 		{
-			if( probe.VisitBuffer( buf ) )
+			if (probe.VisitBuffer(buf))
 			{
 				dirty = true;
 			}
@@ -127,25 +129,4 @@ namespace Bind
 
 	using CachingPixelConstantBufferEx = CachingConstantBufferEx<PixelConstantBufferEx>;
 	using CachingVertexConstantBufferEx = CachingConstantBufferEx<VertexConstantBufferEx>;
-
-	//class NocachePixelConstantBufferEx : public PixelConstantBufferEx
-	//{
-	//public:
-	//	NocachePixelConstantBufferEx( Graphics& gfx,const Dcb::CookedLayout& layout,UINT slot )
-	//		:
-	//		PixelConstantBufferEx( gfx,*layout.ShareRoot(),slot,nullptr ),
-	//		pLayoutRoot( layout.ShareRoot() )
-	//	{}
-	//	NocachePixelConstantBufferEx( Graphics& gfx,const Dcb::Buffer& buf,UINT slot )
-	//		:
-	//		PixelConstantBufferEx( gfx,buf.GetRootLayoutElement(),slot,&buf ),
-	//		pLayoutRoot( buf.ShareLayoutRoot() )
-	//	{}
-	//	const Dcb::LayoutElement& GetRootLayoutElement() const noexcept override
-	//	{
-	//		return *pLayoutRoot;
-	//	}
-	//private:
-	//	std::shared_ptr<Dcb::LayoutElement> pLayoutRoot;
-	//};
 }

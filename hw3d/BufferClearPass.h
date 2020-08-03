@@ -1,9 +1,19 @@
 #pragma once
 #include "Pass.h"
 
-class BufferClearPass : public Pass
+namespace Bind
 {
-public:
-	BufferClearPass(std::string name);
-	void Execute(Graphics& gfx) const noxnd override;
-};
+	class BufferResource;
+}
+
+namespace Rgph
+{
+	class BufferClearPass : public Pass
+	{
+	public:
+		BufferClearPass(std::string name);
+		void Execute(Graphics& gfx) const noxnd override;
+	private:
+		std::shared_ptr<Bind::BufferResource> buffer;
+	};
+}

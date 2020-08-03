@@ -132,6 +132,7 @@ modelPath(path.string())
 		{
 			Step mask("outlineMask");
 
+			// TODO: better sub-layout generation tech for future consideration maybe
 			mask.AddBindable(InputLayout::Resolve(gfx, vtxLayout, VertexShader::Resolve(gfx, "Solid_VS.cso")->GetBytecode()));
 
 			mask.AddBindable(std::make_shared<TransformCbuf>(gfx));
@@ -154,7 +155,7 @@ modelPath(path.string())
 			// TODO: better sub-layout generation tech for future consideration maybe
 			draw.AddBindable(InputLayout::Resolve(gfx, vtxLayout, VertexShader::Resolve(gfx, "Solid_VS.cso")->GetBytecode()));
 
-			draw.AddBindable(std::make_shared<TransformCbufScaling>(gfx, 1.04f));
+			draw.AddBindable(std::make_shared<TransformCbuf>(gfx));
 
 			// TODO: might need to specify rasterizer when doubled-sided models start being used
 

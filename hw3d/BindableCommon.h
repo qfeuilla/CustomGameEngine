@@ -14,4 +14,3 @@
 #include "Rasterizer.h"
 #include "Stencil.h"
 #include "NullPixelShader.h"
-#include "RenderTarget.h"

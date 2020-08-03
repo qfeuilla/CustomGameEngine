@@ -1,6 +1,6 @@
 cbuffer CBuf : register(b1)
 {
-	float3 materialColor;
+    float3 materialColor;
 };
 
 float4 main() : SV_Target

@@ -1,6 +1,7 @@
 #pragma once
 #include "Bindable.h"
 #include "BindableCodex.h"
+#include "GraphicsThrowMacros.h"
 
 namespace Bind
 {
@@ -13,13 +14,13 @@ namespace Bind
 			Write,
 			Mask
 		};
-		Stencil( Graphics& gfx,Mode mode )
+		Stencil(Graphics& gfx, Mode mode)
 			:
-			mode( mode )
+			mode(mode)
 		{
 			D3D11_DEPTH_STENCIL_DESC dsDesc = CD3D11_DEPTH_STENCIL_DESC{ CD3D11_DEFAULT{} };
 
-			if( mode == Mode::Write )
+			if (mode == Mode::Write)
 			{
 				dsDesc.DepthEnable = FALSE;
 				dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
@@ -28,7 +29,7 @@ namespace Bind
 				dsDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 				dsDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_REPLACE;
 			}
-			else if( mode == Mode::Mask )
+			else if (mode == Mode::Mask)
 			{
 				dsDesc.DepthEnable = FALSE;
 				dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
@@ -38,21 +39,22 @@ namespace Bind
 				dsDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
 			}
 
-			GetDevice( gfx )->CreateDepthStencilState( &dsDesc,&pStencil );
+			GetDevice(gfx)->CreateDepthStencilState(&dsDesc, &pStencil);
 		}
-		void Bind( Graphics& gfx ) noexcept override
+		void Bind(Graphics& gfx) noxnd override
 		{
-			GetContext( gfx )->OMSetDepthStencilState( pStencil.Get(),0xFF );
+			INFOMAN_NOHR(gfx);
+			GFX_THROW_INFO_ONLY(GetContext(gfx)->OMSetDepthStencilState(pStencil.Get(), 0xFF));
 		}
-		static std::shared_ptr<Stencil> Resolve( Graphics& gfx,Mode mode )
+		static std::shared_ptr<Stencil> Resolve(Graphics& gfx, Mode mode)
 		{
-			return Codex::Resolve<Stencil>( gfx,mode );
+			return Codex::Resolve<Stencil>(gfx, mode);
 		}
-		static std::string GenerateUID( Mode mode )
+		static std::string GenerateUID(Mode mode)
 		{
 			using namespace std::string_literals;
 			const auto modeName = [mode]() {
-				switch( mode ) {
+				switch (mode) {
 				case Mode::Off:
 					return "off"s;
 				case Mode::Write:
@@ -66,7 +68,7 @@ namespace Bind
 		}
 		std::string GetUID() const noexcept override
 		{
-			return GenerateUID( mode );
+			return GenerateUID(mode);
 		}
 	private:
 		Mode mode;

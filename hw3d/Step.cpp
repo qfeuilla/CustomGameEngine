@@ -4,20 +4,20 @@
 #include "TechniqueProbe.h"
 #include "RenderQueuePass.h"
 
-void Step::Submit(const Drawable& drawable) const 
+void Step::Submit(const Drawable& drawable) const
 {
-	pTargetPass->Accept(Job{ this,&drawable });
+	pTargetPass->Accept(Rgph::Job{ this,&drawable });
 }
 
-void Step::InitializeParentReferences( const Drawable& parent ) noexcept
+void Step::InitializeParentReferences(const Drawable& parent) noexcept
 {
-	for( auto& b : bindables )
+	for (auto& b : bindables)
 	{
-		b->InitializeParentReference( parent );
+		b->InitializeParentReference(parent);
 	}
 }
 
-Step::Step(std::string targetPassName) 
+Step::Step(std::string targetPassName)
 	:
 	targetPassName{ std::move(targetPassName) }
 {}
@@ -45,7 +45,7 @@ void Step::AddBindable(std::shared_ptr<Bind::Bindable> bind_in) noexcept
 	bindables.push_back(std::move(bind_in));
 }
 
-void Step::Bind(Graphics& gfx) const
+void Step::Bind(Graphics& gfx) const noxnd
 {
 	for (const auto& b : bindables)
 	{
@@ -62,7 +62,7 @@ void Step::Accept(TechniqueProbe& probe)
 	}
 }
 
-void Step::Link(RenderGraph& rg)
+void Step::Link(Rgph::RenderGraph& rg)
 {
 	assert(pTargetPass == nullptr);
 	pTargetPass = &rg.GetRenderQueue(targetPassName);

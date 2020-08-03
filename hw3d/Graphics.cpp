@@ -180,8 +180,10 @@ std::shared_ptr<Bind::RenderTarget> Graphics::GetTarget()
 	return pTarget;
 }
 
+
 // Graphics exception stuff
-Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept :
+Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
+	:
 	Exception(line, file),
 	hr(hr)
 {

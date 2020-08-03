@@ -13,7 +13,7 @@ cbuffer ObjectCBuf
 
 
 float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal) : SV_Target
-{    
+{
     // normalize the mesh normal
     viewNormal = normalize(viewNormal);
 	// fragment to light vector data

@@ -8,6 +8,7 @@
 #include "Model.h"
 #include "ScriptCommander.h"
 #include "BlurOutlineRenderGraph.h"
+#include "CustomMath.h"
 
 class App
 {
@@ -31,9 +32,11 @@ private:
 	Rgph::BlurOutlineRenderGraph rg{ wnd.Gfx() };
 	CustomTimer timer;
 	float speed_factor = 1.0f;
-	Camera cam;
+	Camera cam{ {-13.5f,6.0f,3.5f},0.0f,PI / 2.0f };
 	PointLight light;
 	TestCube cube{ wnd.Gfx(),4.0f };
 	TestCube cube2{ wnd.Gfx(),4.0f };
-	Model sponza{ wnd.Gfx(),"Models\\sponza\\sponza.obj",1.0f / 20.0f };
+	Model shark{ wnd.Gfx(),"Models\\testScenes\\shark\\Low Poly Shark Cage Diving Scene.obj",5.0f };
+	Model gobber{ wnd.Gfx(),"Models\\gobber\\GoblinX.obj",4.0f };
+	Model nano{ wnd.Gfx(),"Models\\nano_textured\\nanosuit.obj",2.0f };
 };

@@ -2,7 +2,8 @@
 #include "CustomWindows.h"
 #include "WndException.h"
 #include <d3d11.h>
-#include <wrl.h>
+#include <d3d12.h>
+#include "CustomWRL.h"
 #include <vector>
 #include "DxgiInfoManager.h"
 #include <d3dcompiler.h>

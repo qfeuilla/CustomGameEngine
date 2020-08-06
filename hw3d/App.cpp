@@ -17,12 +17,26 @@ App::App( const std::string& commandLine )
 	light( wnd.Gfx() )
 {
 	cube.SetPos( { 4.0f,0.0f,0.0f } );
+	cube.SetScaling(1.2f, 2.1f, 1.8f);
 	cube2.SetPos( { 0.0f,4.0f,0.0f } );
+	nano.SetRootTransform(
+		dx::XMMatrixRotationY(PI / 2.f) *
+		dx::XMMatrixTranslation(27.f, -0.56f, 1.7f)
+	);
+	gobber.SetRootTransform(
+		dx::XMMatrixRotationY(-PI / 2.f) *
+		dx::XMMatrixTranslation(-8.f, 10.f, 0.f)
+	);
+	shark.SetRootTransform(
+		dx::XMMatrixTranslation(0.0f, 50.0f, 0.f)
+	);
 
 	cube.LinkTechniques(rg);
 	cube2.LinkTechniques(rg);
 	light.LinkTechniques(rg);
-	sponza.LinkTechniques(rg);
+	shark.LinkTechniques(rg);
+	gobber.LinkTechniques(rg);
+	nano.LinkTechniques(rg);
 
 	wnd.Gfx().SetProjection( dx::XMMatrixPerspectiveLH( 1.0f,9.0f / 16.0f,0.5f,400.0f ) );
 }
@@ -64,19 +78,26 @@ void App::DoFrame(float dt)
 
 	light.Submit();
 	cube.Submit();
-	sponza.Submit();
+	shark.Submit();
 	cube2.Submit();
+	gobber.Submit();
+	nano.Submit();
 
 	rg.Execute(wnd.Gfx());
 
 	// imgui windows
-	static MP modelProbe;
-	modelProbe.SpawnWindow(sponza);
+	static MP sponzeProbe{ "Sponza" };
+	static MP gobberProbe{ "Gobber" };
+	static MP nanoProbe{ "Nano" };
+	sponzeProbe.SpawnWindow(shark);
+	gobberProbe.SpawnWindow(gobber);
+	nanoProbe.SpawnWindow(nano);
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	ShowImguiDemoWindow();
 	cube.SpawnControlWindow(wnd.Gfx(), "Cube 1");
 	cube2.SpawnControlWindow(wnd.Gfx(), "Cube 2");
+	rg.RenderWidgets(wnd.Gfx());
 
 	// present
 	wnd.Gfx().EndFrame();

@@ -10,6 +10,7 @@
 #include <string>
 #include <unordered_map>
 #include "CustomDirectXM.h"
+#include "TransformParameters.h"
 
 namespace dx = DirectX;
 
@@ -80,9 +81,11 @@ public:
 class MP : ModelProbe
 {
 public:
+	MP(std::string name) : name(std::move(name))
+	{}
 	void SpawnWindow(Model& model)
 	{
-		ImGui::Begin("Model");
+		ImGui::Begin(name.c_str());
 		ImGui::Columns(2, nullptr, true);
 		model.Accept(*this);
 
@@ -132,6 +135,29 @@ protected:
 		// processing for selecting node
 		if (ImGui::IsItemClicked())
 		{
+			/*** Outline when node selected ***/
+			// used to change the highlighted node on selection change
+			struct Probe : public TechniqueProbe
+			{
+				virtual void OnSetTechnique()
+				{
+					if (pTech->GetName() == "Outline")
+					{
+						pTech->SetActiveState(highlighted);
+					}
+				}
+				bool highlighted = false;
+			} probe;
+
+			// remove highlight on prev-selected node
+			if (pSelectedNode != nullptr)
+			{
+				pSelectedNode->Accept(probe);
+			}
+			// add highlight to newly-selected node
+			probe.highlighted = true;
+			node.Accept(probe);
+
 			pSelectedNode = &node;
 		}
 		// signal if children should also be recursed
@@ -143,15 +169,7 @@ protected:
 	}
 private:
 	Node* pSelectedNode = nullptr;
-	struct TransformParameters
-	{
-		float xRot = 0.0f;
-		float yRot = 0.0f;
-		float zRot = 0.0f;
-		float x = 0.0f;
-		float y = 0.0f;
-		float z = 0.0f;
-	};
+	std::string name;
 	std::unordered_map<int, TransformParameters> transformParams;
 private:
 	TransformParameters& ResolveTransform() noexcept

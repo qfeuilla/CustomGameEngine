@@ -6,6 +6,7 @@
 #include "DynamicConstant.h"
 #include "TechniqueProbe.h"
 #include "TransformCbufScaling.h"
+#include "CustomDirectXM.h"
 
 TestCube::TestCube(Graphics& gfx, float size)
 {
@@ -31,7 +32,7 @@ TestCube::TestCube(Graphics& gfx, float size)
 			only.AddBindable(Sampler::Resolve(gfx));
 
 			auto pvs = VertexShader::Resolve(gfx, "PhongDif_VS.cso");
-			auto pvsbc = pvs->GetBytecode();
+			only.AddBindable(InputLayout::Resolve(gfx, model.vertices.GetLayout(), *pvs));
 			only.AddBindable(std::move(pvs));
 
 			only.AddBindable(PixelShader::Resolve(gfx, "PhongDif_PS.cso"));
@@ -46,10 +47,8 @@ TestCube::TestCube(Graphics& gfx, float size)
 			buf["specularGloss"] = 20.0f;
 			only.AddBindable(std::make_shared<Bind::CachingPixelConstantBufferEx>(gfx, buf, 1u));
 
-			only.AddBindable(InputLayout::Resolve(gfx, model.vertices.GetLayout(), pvsbc));
-
 			only.AddBindable(Rasterizer::Resolve(gfx, false));
-
+			
 			only.AddBindable(tcb);
 
 			shade.AddStep(std::move(only));
@@ -63,7 +62,7 @@ TestCube::TestCube(Graphics& gfx, float size)
 			Step mask("outlineMask");
 
 			// TODO: better sub-layout generation tech for future consideration maybe
-			mask.AddBindable(InputLayout::Resolve(gfx, model.vertices.GetLayout(), VertexShader::Resolve(gfx, "Solid_VS.cso")->GetBytecode()));
+			mask.AddBindable(InputLayout::Resolve(gfx, model.vertices.GetLayout(), *VertexShader::Resolve(gfx, "Solid_VS.cso")));
 
 			mask.AddBindable(std::move(tcb));
 
@@ -81,7 +80,7 @@ TestCube::TestCube(Graphics& gfx, float size)
 			draw.AddBindable(std::make_shared<Bind::CachingPixelConstantBufferEx>(gfx, buf, 1u));
 
 			// TODO: better sub-layout generation tech for future consideration maybe
-			draw.AddBindable(InputLayout::Resolve(gfx, model.vertices.GetLayout(), VertexShader::Resolve(gfx, "Solid_VS.cso")->GetBytecode()));
+			draw.AddBindable(InputLayout::Resolve(gfx, model.vertices.GetLayout(), *VertexShader::Resolve(gfx, "Solid_VS.cso")));
 
 			draw.AddBindable(std::make_shared<TransformCbuf>(gfx));
 
@@ -95,20 +94,30 @@ TestCube::TestCube(Graphics& gfx, float size)
 
 void TestCube::SetPos(DirectX::XMFLOAT3 pos) noexcept
 {
-	this->pos = pos;
+	transform.x = pos.x;
+	transform.y = pos.y;
+	transform.z = pos.z;
 }
 
-void TestCube::SetRotation(float roll, float pitch, float yaw) noexcept
+void TestCube::SetRotation(float rotX, float rotY, float rotZ) noexcept
 {
-	this->roll = roll;
-	this->pitch = pitch;
-	this->yaw = yaw;
+	transform.xRot = rotX;
+	transform.yRot = rotY;
+	transform.zRot = rotZ;
+}
+
+void TestCube::SetScaling(float scaleX, float scaleY, float scaleZ) noexcept
+{
+	transform.scaleX = scaleX;
+	transform.scaleY = scaleY;
+	transform.scaleZ = scaleZ;
 }
 
 DirectX::XMMATRIX TestCube::GetTransformXM() const noexcept
 {
-	return DirectX::XMMatrixRotationRollPitchYaw(roll, pitch, yaw) *
-		DirectX::XMMatrixTranslation(pos.x, pos.y, pos.z);
+	return DirectX::XMMatrixRotationRollPitchYaw(transform.xRot, transform.yRot, transform.zRot) *
+		DirectX::XMMatrixTranslation(transform.x, transform.y, transform.z) *
+		DirectX::XMMatrixScaling(transform.scaleX, transform.scaleY, transform.scaleZ);
 }
 
 void TestCube::SpawnControlWindow(Graphics& gfx, const char* name) noexcept
@@ -116,13 +125,13 @@ void TestCube::SpawnControlWindow(Graphics& gfx, const char* name) noexcept
 	if (ImGui::Begin(name))
 	{
 		ImGui::Text("Position");
-		ImGui::SliderFloat("X", &pos.x, -80.0f, 80.0f, "%.1f");
-		ImGui::SliderFloat("Y", &pos.y, -80.0f, 80.0f, "%.1f");
-		ImGui::SliderFloat("Z", &pos.z, -80.0f, 80.0f, "%.1f");
+		ImGui::SliderFloat("X", &transform.x, -80.0f, 80.0f, "%.1f");
+		ImGui::SliderFloat("Y", &transform.y, -80.0f, 80.0f, "%.1f");
+		ImGui::SliderFloat("Z", &transform.z, -80.0f, 80.0f, "%.1f");
 		ImGui::Text("Orientation");
-		ImGui::SliderAngle("Roll", &roll, -180.0f, 180.0f);
-		ImGui::SliderAngle("Pitch", &pitch, -180.0f, 180.0f);
-		ImGui::SliderAngle("Yaw", &yaw, -180.0f, 180.0f);
+		ImGui::SliderAngle("Rotation X", &transform.xRot, -180.0f, 180.0f);
+		ImGui::SliderAngle("Rotation Y", &transform.yRot, -180.0f, 180.0f);
+		ImGui::SliderAngle("Rotation Z", &transform.zRot, -180.0f, 180.0f);
 
 		class Probe : public TechniqueProbe
 		{
